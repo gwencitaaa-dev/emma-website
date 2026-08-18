@@ -51,6 +51,7 @@
     overflow-x: hidden;
   }
 
+  /* faint film-grain / warmth texture */
   body::before{
     content:"";
     position: fixed; inset:0;
@@ -98,7 +99,7 @@
 
   section{ position: relative; z-index:1; }
 
-  /* Nav */
+  /* ---------- Nav ---------- */
   header.site-nav{
     position: fixed; top:0; left:0; right:0;
     z-index: 100;
@@ -108,7 +109,9 @@
     border-bottom: 1px solid transparent;
     transition: border-color .3s ease, background .3s ease;
   }
-  header.site-nav.scrolled{ border-bottom-color: var(--line); }
+  header.site-nav.scrolled{
+    border-bottom-color: var(--line);
+  }
   .nav-inner{
     max-width: var(--wrap);
     margin:0 auto;
@@ -121,10 +124,6 @@
     font-family: var(--display);
     font-size: 1.18rem;
     letter-spacing: 0.01em;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    text-decoration: none;
   }
   .nav-mark span{ color: var(--brass); font-style: italic; }
 
@@ -164,9 +163,14 @@
     white-space: nowrap;
   }
   .nav-cta:hover{ background: var(--brass); border-color: var(--brass); color: #0c2b33; }
-  .nav-toggle{ display:none; background:none; border:none; color: var(--cream); font-size: 1.6rem; cursor:pointer; padding: 0.2rem 0.4rem; }
 
-  /* Hero */
+  .nav-toggle{
+    display:none;
+    background:none; border:none; color: var(--cream);
+    font-size: 1.6rem; cursor:pointer; padding: 0.2rem 0.4rem;
+  }
+
+  /* ---------- Hero ---------- */
   .hero{
     min-height: 100svh;
     display:flex;
@@ -176,19 +180,27 @@
     padding-bottom: 4rem;
     position: relative;
   }
+
   .hero-grid{
     display:grid;
     grid-template-columns: 1.35fr 0.9fr;
     gap: 3rem;
     align-items: end;
   }
+
   .hero-eyebrow{ margin-bottom: 1.6rem; }
+
   .hero h1{
     font-size: clamp(3rem, 8vw, 6.4rem);
     line-height: 0.96;
     font-weight: 450;
   }
-  .hero h1 em{ font-style: italic; font-weight: 400; color: var(--brass-bright); }
+  .hero h1 em{
+    font-style: italic;
+    font-weight: 400;
+    color: var(--brass-bright);
+  }
+
   .hero-role{
     margin-top: 1.6rem;
     font-size: clamp(1.02rem, 1.6vw, 1.3rem);
@@ -197,7 +209,13 @@
     font-weight: 300;
   }
   .hero-role strong{ color: var(--cream); font-weight: 500; }
-  .hero-actions{ margin-top: 2.6rem; display:flex; gap: 1rem; flex-wrap: wrap; }
+
+  .hero-actions{
+    margin-top: 2.6rem;
+    display:flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 
   .btn{
     display:inline-flex;
@@ -214,9 +232,16 @@
     transition: transform .25s ease, background .25s ease, border-color .25s ease, color .25s ease;
   }
   .btn:active{ transform: translateY(1px); }
-  .btn-solid{ background: var(--brass); color: #0c2b33; font-weight: 600; }
+  .btn-solid{
+    background: var(--brass);
+    color: #0c2b33;
+    font-weight: 600;
+  }
   .btn-solid:hover{ background: var(--brass-bright); }
-  .btn-ghost{ border-color: var(--line-strong); color: var(--cream); }
+  .btn-ghost{
+    border-color: var(--line-strong);
+    color: var(--cream);
+  }
   .btn-ghost:hover{ border-color: var(--brass); color: var(--brass-bright); }
 
   .hero-side{
@@ -224,7 +249,12 @@
     padding-left: 2rem;
     padding-bottom: 0.4rem;
   }
-  .hero-side p{ font-size: 0.92rem; color: var(--cream-dim); max-width: 32ch; font-weight: 300; }
+  .hero-side p{
+    font-size: 0.92rem;
+    color: var(--cream-dim);
+    max-width: 32ch;
+    font-weight: 300;
+  }
   .hero-orchestras{
     margin-top: 1.4rem;
     display:flex;
@@ -236,209 +266,637 @@
     color: var(--cream-dim);
   }
 
-  /* Sheet Music Staff Bar */
-  .hero-bottom-wrap {
-    margin-top: 3.5rem;
+  /* waveform signature */
+  .waveform-row{
+    display:flex;
+    align-items:center;
+    gap: 1.5rem;
+    margin-top: 3.2rem;
+  }
+  .clef-mark{
+    flex-shrink: 0;
+    width: 46px;
+    height: 90px;
+    opacity: 0.92;
+    color: var(--brass-bright);
+  }
+  .clef-mark circle{
+    fill: var(--brass-bright);
+  }
+  .waveform{
     width: 100%;
-    position: relative;
-    padding: 10px 0;
+    height: 90px;
+    display:block;
+    flex: 1;
   }
-  .staff-container {
-    position: relative;
-    width: 100%;
-    height: 48px;
-    display: flex;
-    align-items: center;
+  .waveform path{
+    fill:none;
+    stroke: var(--brass);
+    stroke-width: 1.4;
+    opacity: 0.85;
   }
-  .staff-lines {
-    position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    pointer-events: none;
-    z-index: 1;
+  .waveform path.w2{ stroke: var(--rosewood-bright); opacity:0.45; }
+
+  @keyframes waveflow{
+    0%{ stroke-dashoffset: 0; }
+    100%{ stroke-dashoffset: -240; }
   }
-  .staff-lines span {
-    display: block;
-    width: 100%;
-    height: 1px;
-    background: var(--brass);
-    opacity: 0.4;
-  }
-  
-  .staff-clef-area {
-    position: relative;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    padding-right: 14px;
-    background: var(--ink);
-  }
-  
-  .true-bass-clef {
-    width: 32px;
-    height: 32px;
-    fill: var(--brass);
-    display: block;
+  .waveform path.animated{
+    stroke-dasharray: 6 5;
+    animation: waveflow 7s linear infinite;
   }
 
-  .staff-flow {
-    position: relative;
-    flex-grow: 1;
-    height: 100%;
-    z-index: 2;
-    overflow: hidden;
+  /* ---------- section shell ---------- */
+  .section{
+    padding: 7rem 0;
+    border-top: 1px solid var(--line);
   }
-  .staff-flow::after {
-    content: "";
-    position: absolute;
-    top: 0; bottom: 0; left: 0; right: 0;
-    background-image: 
-      linear-gradient(90deg, var(--brass) 1px, transparent 1px),
-      radial-gradient(ellipse at center, var(--brass) 3.5px, transparent 4px);
-    background-size: 120px 100%, 40px 100%;
-    background-position: 0 0, 20px 14px;
-    background-repeat: repeat-x, repeat-x;
-    opacity: 0.65;
-    animation: flowStaff 16s linear infinite;
-  }
-  @keyframes flowStaff {
-    from { background-position: 0 0, 20px 14px; }
-    to { background-position: -240px 0, -220px 14px; }
-  }
-
-  /* Sections */
-  .section{ padding: 7rem 0; border-top: 1px solid var(--line); }
   .section-head{
-    display:flex; justify-content: space-between; align-items: flex-end;
-    gap: 2rem; margin-bottom: 3.5rem; flex-wrap: wrap;
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
   }
-  .section-head h2{ font-size: clamp(2.1rem, 4vw, 3.1rem); font-weight: 450; max-width: 18ch; }
+  .section-head h2{
+    font-size: clamp(2.1rem, 4vw, 3.1rem);
+    font-weight: 450;
+    max-width: 16ch;
+  }
+  .section-head .section-note{
+    max-width: 32ch;
+    color: var(--cream-dim);
+    font-size: 0.94rem;
+    font-weight: 300;
+  }
 
-  /* About */
-  .about-grid{ display:grid; grid-template-columns: 0.8fr 1.2fr; gap: 3.5rem; align-items: start; }
+  /* ---------- About ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
   .portrait{
-    position: relative; aspect-ratio: 4/5;
-    background: linear-gradient(155deg, var(--panel-2), var(--panel) 60%);
-    border: 1px solid var(--line); border-radius: 3px; overflow: hidden;
-    display:flex; align-items: flex-end; padding: 1.4rem;
+    position: relative;
+    aspect-ratio: 4/5;
+    background:
+      linear-gradient(155deg, var(--panel-2), var(--panel) 60%);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    display:flex;
+    align-items: flex-end;
+    padding: 1.4rem;
   }
   .portrait::before{
-    content:""; position:absolute; inset:0;
+    content:"";
+    position:absolute; inset:0;
     background-image: radial-gradient(circle at 30% 20%, rgba(42,99,72,0.22), transparent 55%);
-    z-index: 1; pointer-events: none;
   }
-  .portrait img {
-    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+  .portrait::after{
+    content:"";
+    position:absolute;
+    inset: 14px;
+    border: 1px solid rgba(243,234,216,0.18);
+    pointer-events:none;
   }
   .portrait-caption{
-    position: relative; z-index: 2; font-size: 0.72rem; letter-spacing: 0.08em;
-    color: var(--muted); text-transform: uppercase; background: rgba(12, 43, 51, 0.75);
-    padding: 0.2rem 0.5rem; border-radius: 2px;
+    position: relative;
+    z-index: 2;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
   }
   .portrait-mark{
-    position:absolute; top: 50%; left:50%; transform: translate(-50%,-50%);
-    font-family: var(--display); font-style: italic; font-size: 4.5rem;
-    color: rgba(243,234,216,0.12); z-index: 1;
-  }
-
-  .about-copy p{ font-size: 1.03rem; color: var(--cream-dim); font-weight: 300; margin: 0 0 1.3rem; }
-  .about-copy p strong{ color: var(--cream); font-weight: 500; }
-
-  /* Cards & Portfolio */
-  .cards-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--line); border: 1px solid var(--line); }
-  .card{ background: var(--ink); padding: 2.4rem 2rem; display:flex; flex-direction:column; min-height: 280px; }
-  .card .card-year{ font-size: 0.75rem; letter-spacing: 0.08em; color: var(--brass); text-transform: uppercase; }
-  .card h4{ margin-top: 0.9rem; font-size: 1.3rem; font-weight: 450; line-height: 1.25; }
-  .card p{ margin-top: 0.9rem; font-size: 0.9rem; color: var(--cream-dim); font-weight: 300; flex-grow:1; }
-  .card .card-loc{ margin-top: 1.4rem; font-size: 0.78rem; color: var(--muted); padding-top: 1rem; border-top: 1px solid var(--line); }
-
-  .card-img-wrap { padding: 0; overflow: hidden; position: relative; display: flex; flex-direction: column; }
-  .card-img-wrap img { width: 100%; height: 210px; object-fit: cover; transition: transform 0.4s ease; display: block; }
-  .card-img-wrap:hover img { transform: scale(1.03); }
-  .card-img-content { padding: 1.8rem 2rem 2rem; display: flex; flex-direction: column; flex-grow: 1; }
-  .card-img-content p { flex-grow: 1; }
-
-  .img-placeholder {
-    width: 100%;
-    height: 210px;
-    background: linear-gradient(145deg, var(--panel-2), var(--panel));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--brass);
+    position:absolute; top: 50%; left:50%;
+    transform: translate(-50%,-50%);
     font-family: var(--display);
     font-style: italic;
-    font-size: 1.1rem;
-    border-bottom: 1px solid var(--line);
+    font-size: 4.5rem;
+    color: rgba(243,234,216,0.12);
+    letter-spacing: -0.02em;
   }
 
-  /* Essay / Extended Writing Layout */
-  .essay-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .about-copy p{
+    font-size: 1.03rem;
+    color: var(--cream-dim);
+    font-weight: 300;
+    margin: 0 0 1.3rem;
+  }
+  .about-copy p strong{ color: var(--cream); font-weight: 500; }
+
+  blockquote.pull{
+    font-family: var(--display);
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    line-height: 1.4;
+    color: var(--brass-bright);
+    margin: 2.2rem 0;
+    padding-left: 1.4rem;
+    border-left: 2px solid var(--brass);
+  }
+  blockquote.pull cite{
+    display:block;
+    font-family: var(--body);
+    font-style: normal;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.8rem;
+  }
+
+  .credentials{
+    margin-top: 2.2rem;
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .credential{
+    background: var(--ink);
+    padding: 1.3rem 1.4rem;
+  }
+  .credential .num{
+    font-family: var(--display);
+    font-size: 1.9rem;
+    color: var(--brass);
+    display:block;
+  }
+  .credential .num.num-sm{
+    font-size: 1.15rem;
+    line-height: 1.35;
+  }
+  .credential .lab{
+    font-size: 0.78rem;
+    color: var(--cream-dim);
+    margin-top: 0.3rem;
+  }
+
+  /* ---------- Services ---------- */
+  .services-list{
+    display:flex;
+    flex-direction:column;
+  }
+  .service-row{
+    display:grid;
+    grid-template-columns: 5rem 1.4fr 1.6fr;
+    gap: 2rem;
+    padding: 2.2rem 0;
+    border-top: 1px solid var(--line);
+    align-items: start;
+    transition: background .3s ease;
+  }
+  .service-row:last-child{ border-bottom: 1px solid var(--line); }
+  .service-row:hover{ background: rgba(63,143,104,0.06); }
+
+  .service-index{
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+  .service-title h3{
+    font-size: 1.5rem;
+    font-weight: 450;
+    color: var(--cream);
+  }
+  .service-title .service-tag{
+    display:inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+  .service-desc p{
+    color: var(--cream-dim);
+    font-size: 0.96rem;
+    font-weight: 300;
+    margin: 0;
+  }
+
+  @media (max-width: 720px){
+    .service-row{ grid-template-columns: 1fr; gap: 0.6rem; }
+    .service-index{ order: -1; }
+  }
+
+  /* ---------- Portfolio / highlights strip ---------- */
+  .highlight-strip{
+    margin-top: 4.5rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 1.6rem 0;
+    overflow: hidden;
+  }
+  .marquee{
+    display:flex;
+    gap: 3.5rem;
+    white-space: nowrap;
+    width: max-content;
+    animation: scroll-left 32s linear infinite;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--cream-dim);
+  }
+  .marquee span{ opacity: 0.9; }
+  .marquee .dot{ color: var(--brass); font-style:normal; }
+  @keyframes scroll-left{
+    from{ transform: translateX(0); }
+    to{ transform: translateX(-50%); }
+  }
+
+  /* ---------- Programs / portfolio cards ---------- */
+  .cards-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5px;
     background: var(--line);
     border: 1px solid var(--line);
-    margin-top: 2rem;
   }
-  .essay-card {
+  .card{
     background: var(--ink);
-    padding: 3rem 2.5rem;
-    display: flex;
-    flex-direction: column;
+    padding: 2.4rem 2rem;
+    display:flex;
+    flex-direction:column;
+    min-height: 280px;
   }
-  .essay-card h3 {
-    font-size: 1.6rem;
-    margin-top: 0.8rem;
-    margin-bottom: 1.2rem;
+  .card .card-year{
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--brass);
+    text-transform: uppercase;
   }
-  .essay-card p {
-    font-size: 0.95rem;
+  .card h4{
+    margin-top: 0.9rem;
+    font-size: 1.3rem;
+    font-weight: 450;
+    line-height: 1.25;
+  }
+  .card p{
+    margin-top: 0.9rem;
+    font-size: 0.9rem;
     color: var(--cream-dim);
     font-weight: 300;
-    margin-bottom: 1.2rem;
+    flex-grow:1;
   }
-  .essay-meta {
-    margin-top: auto;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8rem;
+  .card .card-loc{
+    margin-top: 1.4rem;
+    font-size: 0.78rem;
     color: var(--muted);
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
   }
-
-  @media (max-width: 900px){ 
-    .cards-grid{ grid-template-columns: 1fr 1fr; } 
-    .essay-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 620px){ .cards-grid{ grid-template-columns: 1fr; } }
-
-  /* Footer */
-  footer{ border-top: 1px solid var(--line); padding: 3rem 0 2.4rem; }
-  .footer-inner{ display:flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-mark{ font-family: var(--display); font-style: italic; color: var(--cream-dim); font-size: 1rem; display: flex; align-items: center; gap: 0.6rem; }
-  .footer-meta{ font-size: 0.78rem; color: var(--muted); display:flex; gap: 1.6rem; }
-  .back-to-top{ text-decoration:none; color: var(--brass); font-size: 0.78rem; }
-
-  .reveal{ opacity: 0; transform: translateY(18px); transition: opacity .8s ease, transform .8s ease; }
-  .reveal.in-view{ opacity: 1; transform: translateY(0); }
 
   @media (max-width: 900px){
-    .hero-grid{ grid-template-columns: 1fr; }
+    .cards-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 620px){
+    .cards-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Publications ---------- */
+  .thesis-card{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2.5rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 2.4rem;
+    text-decoration:none;
+    color: inherit;
+    margin-bottom: 3rem;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .thesis-card:hover{ border-color: var(--brass); background: var(--panel-2); }
+  .thesis-tag{
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+  .thesis-meta h3{
+    margin-top: 0.8rem;
+    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    font-weight: 450;
+    max-width: 44ch;
+    line-height: 1.3;
+  }
+  .thesis-meta p{
+    margin-top: 1rem;
+    color: var(--cream-dim);
+    font-size: 0.95rem;
+    font-weight: 300;
+    max-width: 58ch;
+  }
+  .thesis-link{
+    white-space: nowrap;
+    font-size: 0.85rem;
+    color: var(--brass-bright);
+    flex-shrink: 0;
+  }
+
+  .pub-list{ display:flex; flex-direction:column; }
+  .pub-row{
+    display:grid;
+    grid-template-columns: 6rem 1fr auto;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 1.3rem 0.2rem;
+    border-top: 1px solid var(--line);
+    text-decoration:none;
+    color: inherit;
+    transition: background .25s ease, padding-left .25s ease;
+  }
+  .pub-list .pub-row:last-child{ border-bottom: 1px solid var(--line); }
+  .pub-row:hover{ background: rgba(63,143,104,0.06); padding-left: 0.7rem; }
+  .pub-date{ font-size: 0.78rem; color: var(--muted); letter-spacing: 0.03em; }
+  .pub-title{ font-family: var(--display); font-size: 1.05rem; font-weight: 450; color: var(--cream); }
+  .pub-outlet{ font-size: 0.78rem; color: var(--brass); white-space: nowrap; }
+
+  @media (max-width: 640px){
+    .thesis-card{ flex-direction: column; align-items: flex-start; }
+    .pub-row{ grid-template-columns: 1fr; gap: 0.3rem; padding: 1.1rem 0.2rem; }
+    .pub-outlet{ order: -1; }
+  }
+
+  /* ---------- Calendly ---------- */
+  .booking{
+    background: var(--panel);
+  }
+  .booking-inner{
+    display:grid;
+    grid-template-columns: 0.9fr 1.4fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .booking-copy p{
+    color: var(--cream-dim);
+    font-weight: 300;
+    font-size: 0.98rem;
+  }
+  .booking-list{
+    list-style:none;
+    margin: 1.6rem 0 0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap: 0.8rem;
+  }
+  .booking-list li{
+    display:flex;
+    align-items:baseline;
+    gap: 0.8rem;
+    font-size: 0.92rem;
+    color: var(--cream-dim);
+  }
+  .booking-list li::before{
+    content:"—";
+    color: var(--brass);
+  }
+
+  .calendly-frame{
+    background: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    min-height: 620px;
+    padding: 1px;
+    position: relative;
+  }
+  .calendly-inline-widget{
+    min-width: 100%;
+    height: 620px;
+  }
+  .calendly-placeholder{
+    height: 620px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 2rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    gap: 0.6rem;
+  }
+  .calendly-placeholder strong{
+    color: var(--cream-dim);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 860px){
+    .booking-inner{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Contact ---------- */
+  .contact-inner{
+    display:grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 3.5rem;
+  }
+  .contact-info p{
+    color: var(--cream-dim);
+    font-weight: 300;
+    font-size: 0.98rem;
+    max-width: 34ch;
+  }
+  .contact-detail{
+    margin-top: 2rem;
+    display:flex;
+    flex-direction:column;
+    gap: 1.2rem;
+  }
+  .contact-detail .label{
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .contact-detail .value{
+    font-family: var(--display);
+    font-size: 1.15rem;
+    margin-top: 0.2rem;
+  }
+  .contact-detail a.value{
+    text-decoration:none;
+    border-bottom: 1px solid var(--line-strong);
+    transition: border-color .25s ease, color .25s ease;
+  }
+  .contact-detail a.value:hover{ color: var(--brass-bright); border-color: var(--brass-bright); }
+
+  .social-row{
+    margin-top: 2.4rem;
+    display:flex;
+    gap: 1.4rem;
+  }
+  .social-row a{
+    font-size: 0.82rem;
+    text-decoration:none;
+    color: var(--cream-dim);
+    border: 1px solid var(--line);
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    transition: all .25s ease;
+  }
+  .social-row a:hover{ border-color: var(--brass); color: var(--brass-bright); }
+
+  /* form */
+  form.contact-form{
+    display:flex;
+    flex-direction:column;
+    gap: 1.5rem;
+  }
+  .form-row{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap: 0.5rem;
+  }
+  .field label{
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .field input,
+  .field select,
+  .field textarea{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line-strong);
+    padding: 0.7rem 0.1rem;
+    color: var(--cream);
+    font-family: var(--body);
+    font-size: 0.98rem;
+    outline: none;
+    transition: border-color .25s ease;
+  }
+  .field select option{ background: var(--panel); color: var(--cream); }
+  .field input::placeholder,
+  .field textarea::placeholder{ color: var(--muted); }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus{ border-bottom-color: var(--brass); }
+  .field textarea{ resize: vertical; min-height: 120px; }
+
+  /* honeypot - hidden from humans, catches bots for Web3Forms */
+  .hp-field{
+    position: absolute;
+    left: -9999px;
+    top: -9999px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-foot{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .form-note{ font-size: 0.76rem; color: var(--muted); max-width: 32ch; }
+
+  .form-status{
+    font-size: 0.85rem;
+    margin-top: 0.4rem;
+    min-height: 1.2em;
+  }
+  .form-status.ok{ color: #9fd08a; }
+  .form-status.err{ color: var(--rosewood-bright); }
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top: 1px solid var(--line);
+    padding: 3rem 0 2.4rem;
+  }
+  .footer-inner{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-mark{
+    font-family: var(--display);
+    font-style: italic;
+    color: var(--cream-dim);
+    font-size: 1rem;
+  }
+  .footer-meta{
+    font-size: 0.78rem;
+    color: var(--muted);
+    display:flex;
+    gap: 1.6rem;
+  }
+  .back-to-top{
+    text-decoration:none;
+    color: var(--brass);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in-view{
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px){
+    .hero-grid{ grid-template-columns: 1fr; align-items:start; }
     .hero-side{ border-left:none; border-top: 1px solid var(--line); padding-left:0; padding-top: 1.6rem; }
     .about-grid{ grid-template-columns: 1fr; }
     .portrait{ max-width: 340px; }
+    .contact-inner{ grid-template-columns: 1fr; }
+    .booking-inner{ grid-template-columns: 1fr; }
   }
+
   @media (max-width: 760px){
     .nav-links, .nav-cta{ display:none; }
     .nav-toggle{ display:block; }
     .nav-links.open{
-      display:flex; position: absolute; top: 100%; left:0; right:0;
-      flex-direction:column; background: var(--panel); padding: 1.5rem var(--pad) 2rem; border-bottom: 1px solid var(--line); gap: 1.2rem;
+      display:flex;
+      position: absolute;
+      top: 100%; left:0; right:0;
+      flex-direction:column;
+      background: var(--panel);
+      padding: 1.5rem var(--pad) 2rem;
+      border-bottom: 1px solid var(--line);
+      gap: 1.2rem;
     }
+    .form-row{ grid-template-columns: 1fr; }
+    .credentials{ grid-template-columns: 1fr 1fr; }
+    .clef-mark{ width: 32px; height: 64px; }
+    .waveform-row{ gap: 0.9rem; }
+    .waveform{ height: 64px; }
+  }
+
+  ::selection{ background: var(--brass); color: #0c2b33; }
+
+  :focus-visible{
+    outline: 2px solid var(--brass-bright);
+    outline-offset: 3px;
   }
 </style>
 </head>
@@ -446,38 +904,34 @@
 
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
-    <a href="#top" class="nav-mark">
-      <svg class="true-bass-clef" viewBox="0 0 24 24" style="width:18px;height:18px;">
-        <path d="M7 6c1.66 0 3 1.34 3 3 0 1.1-.6 2.06-1.5 2.58.55.51.9 1.24.9 2.05 0 1.66-1.34 3-3 3s-3-1.34-3-3c0-.81.35-1.54.9-2.05C4.6 11.06 4 10.1 4 9c0-1.66 1.34-3 3-3zm0 2c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm0 4c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5zm6-5h2v2h-2v2h2v2h-2v4h4v-2h2v2h-2v2h-4V9z"/>
-        <circle cx="15" cy="11" r="1.2"/>
-        <circle cx="15" cy="14" r="1.2"/>
-      </svg>
-      Emma Sullivan <span>·</span> Double Bass
-    </a>
+    <a href="#top" class="nav-mark">Emma Sullivan <span>·</span> Double Bass</a>
     <nav>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#writing">Writing &amp; Media</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#booking">Book a Call</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
-    <a href="#contact" class="nav-cta">Get in Touch</a>
+    <a href="#contact" class="nav-cta">Enquire</a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
   </div>
 </header>
 
 <main id="top">
-  <!-- Hero Section -->
+
+  <!-- ================= HERO ================= -->
   <section class="hero wrap">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow hero-eyebrow">Melbourne, Australia</p>
+        <p class="eyebrow">Melbourne, Australia</p>
         <h1>Emma<br>Sullivan<em>.</em></h1>
         <p class="hero-role">Principal Double Bass of the Melbourne Chamber Orchestra, Emma Sullivan is an acclaimed <strong>bassist, educator, and writer</strong> with over two decades of experience on major stages across Australia, New Zealand, and the United States.</p>
         <div class="hero-actions">
-          <a href="#portfolio" class="btn btn-solid">Explore Portfolio</a>
-          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+          <a href="#booking" class="btn btn-solid">Book a call</a>
+          <a href="#portfolio" class="btn btn-ghost">View portfolio</a>
         </div>
       </div>
       <div class="hero-side">
@@ -490,29 +944,27 @@
       </div>
     </div>
 
-    <!-- Sheet Music Staff Bar with Anatomically Correct Bass Clef -->
-    <div class="hero-bottom-wrap">
-      <div class="staff-container">
-        <!-- 5 Staff Lines -->
-        <div class="staff-lines">
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <!-- Accurate Bass Clef (F-Clef SVG) -->
-        <div class="staff-clef-area">
-          <svg class="true-bass-clef" viewBox="0 0 32 32" aria-label="Bass Clef">
-            <path d="M10 5c3.87 0 7 3.13 7 7 0 2.45-1.3 4.6-3.26 5.78C14.7 18.7 15.5 20.08 15.5 21.6c0 3.53-2.87 6.4-6.4 6.4-3.53 0-6.4-2.87-6.4-6.4 0-1.52.8-2.9 1.76-3.82C5.3 16.6 4 14.45 4 12c0-3.87 3.13-7 7-7zm0 2c-2.76 0-5 2.24-5 5 0 1.9 1.05 3.55 2.62 4.41l.38.21-.21.38C7.15 18.25 6.5 19.85 6.5 21.6c0 2.43 1.97 4.4 4.4 4.4 2.43 0 4.4-1.97 4.4-4.4 0-1.75-.65-3.35-1.79-4.6l-.21-.38.38-.21C13.95 15.55 15 13.9 15 12c0-2.76-2.24-5-5-5z"/>
-            <circle cx="21" cy="11" r="1.5"/>
-            <circle cx="21" cy="15" r="1.5"/>
-            <path d="M21 7v12" stroke="var(--brass)" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <!-- Flowing notes & bar lines -->
-        <div class="staff-flow"></div>
-      </div>
+    <div class="waveform-row">
+      <svg class="clef-mark" viewBox="0 0 100 120" aria-hidden="true">
+        <!-- Bass (F) clef, hand-drawn -->
+        <path fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round"
+          d="M22,20
+             C 30,2 74,2 76,26
+             C 78,48 48,54 30,62
+             C 50,58 62,66 60,80
+             C 58,96 40,98 30,88" />
+        <circle cx="86" cy="20" r="6" />
+        <circle cx="86" cy="40" r="6" />
+      </svg>
+
+      <svg class="waveform" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
+        <path class="w2" d="M0,45 C 60,10 120,80 180,45 C 240,10 300,80 360,45 C 420,10 480,80 540,45 C 600,10 660,80 720,45 C 780,10 840,80 900,45 C 960,10 1020,80 1080,45 C 1140,10 1200,45 1200,45" />
+        <path class="animated" d="M0,45 C 40,20 80,70 120,45 C 160,20 200,70 240,45 C 280,20 320,70 360,45 C 400,20 440,70 480,45 C 520,20 560,70 600,45 C 640,20 680,70 720,45 C 760,20 800,70 840,45 C 880,20 920,70 960,45 C 1000,20 1040,70 1080,45 C 1120,20 1160,70 1200,45" />
+      </svg>
     </div>
   </section>
 
-  <!-- About Section -->
+  <!-- ================= ABOUT ================= -->
   <section class="section" id="about">
     <div class="wrap">
       <div class="section-head reveal">
@@ -520,27 +972,119 @@
           <p class="eyebrow">About</p>
           <h2>Two decades of<br>musical storytelling,<br>on and off the stage.</h2>
         </div>
+        <p class="section-note">From regional Victoria to the Beijing Olympic Arts Festival, Emma's career is defined by a deep curiosity for her instrument, a love for chamber collaboration, and a passion for mentoring the next generation.</p>
       </div>
 
       <div class="about-grid">
         <div class="reveal">
           <div class="portrait">
-            <img src="images/emma-ballarat.jpg" alt="Emma with wildlife in Ballarat" onerror="this.style.display='none'">
             <span class="portrait-mark">ES</span>
-            <span class="portrait-caption">Ballarat, Victoria</span>
+            <span class="portrait-caption">Photograph — replace with your own image</span>
+          </div>
+          <div class="credentials">
+            <div class="credential"><span class="num">18+</span><span class="lab">Years performing professionally</span></div>
+            <div class="credential"><span class="num">DMA</span><span class="lab">Doctorate, Collaborative Contrabass</span></div>
+            <div class="credential"><span class="num num-sm">AUS · NZ<br>JPN · USA</span><span class="lab">Countries performed in</span></div>
           </div>
         </div>
 
         <div class="about-copy reveal">
-          <p>Dr. Emma Sullivan is a Melbourne-based double bassist, educator and writer, originally from Toowoomba, Queensland. She has served as the <strong>Principal Double Bass and Education Manager of the Melbourne Chamber Orchestra</strong> since 2009.</p>
-          <p>Equally at home on the orchestral stage and in intimate chamber settings, Emma has performed extensively with major Australian and New Zealand orchestras, including the Melbourne Symphony Orchestra and the New Zealand Symphony Orchestra.</p>
-          <p>Alongside her performing career, Emma is an active writer and educator, contributing analytical program notes, articles on collaborative contrabass practice, and fostering the next generation of string players across Victoria through initiatives such as the VCASS Double Bass Day.</p>
+          <p>Dr. Emma Sullivan is a Melbourne-based double bassist, educator and writer, originally from Toowoomba, Queensland. She has served as the <strong>Principal Double Bass and Education Manager of the Melbourne Chamber Orchestra</strong> since 2009, and regularly performs as a casual musician with the Melbourne Symphony Orchestra and Orchestra Victoria.</p>
+
+          <p>Her performance career spans the globe. She has toured Europe with the Melbourne Symphony Orchestra, appeared with the New Zealand Symphony Orchestra at the <strong>Beijing Olympic Arts Festival</strong>, and traveled across regional Australia with the Australian Chamber Orchestra's ACO2. She has also performed with the <strong>Australian World Orchestra</strong>, bringing together some of the country's finest musicians from ensembles around the world. As a dedicated chamber musician, Emma has performed with the Australian Octet, Southern Cross Soloists, Melbourne Chamber Players and Inventi Ensemble, and is a frequent guest at festivals including Music by the Springs, the Port Fairy Spring Music Festival and the Bendigo Chamber Music Festival.</p>
+
+          <blockquote class="pull">
+            "You get the opportunity to not only hear the collective sound, but to truly get to know each individual musical personality. It's the perfect blend of chamber intimacy and large-ensemble power."
+            <cite>On performing without a conductor with the Melbourne Chamber Orchestra</cite>
+          </blockquote>
+
+          <p>Emma completed her foundational studies with Michael Morgan at the Queensland Conservatorium, Jeff Bradetich at the University of North Texas, and Steve Reeves at the Australian National Academy of Music (ANAM), where she was a Fellow in 2009. In 2012, she was awarded the prestigious <strong>Peter Mitchell Churchill Fellowship</strong> to study in Paris under the renowned French double bassist Thierry Barbé. She holds a Doctorate of Musical Arts, completed in 2018 through Griffith University's Queensland Conservatorium, where her doctoral research, <em>Collaborative Contrabass</em>, focused extensively on chamber music written for the instrument.</p>
+
+          <p>Beyond the stage, Emma is a passionate educator. She is the founder of the <strong>VCASS Double Bass Day</strong>, an annual event that brings together student bassists from across Victoria for masterclasses and massed ensemble performances. She also contributes regular writing and commentary on classical music to the online arts publication <strong>CutCommon</strong>.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Portfolio Section -->
+  <!-- ================= SERVICES ================= -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Services</p>
+          <h2>Ways to work<br>together.</h2>
+        </div>
+        <p class="section-note">Available for orchestral and solo performances, private teaching, curated chamber residencies, and music journalism.</p>
+      </div>
+
+      <div class="services-list reveal">
+        <div class="service-row">
+          <div class="service-index">i.</div>
+          <div class="service-title">
+            <h3>Performance &amp; Soloist Engagements</h3>
+            <span class="service-tag">Orchestral &amp; Chamber</span>
+          </div>
+          <div class="service-desc">
+            <p>Professional orchestral, chamber and solo double bass performances for concert series, festivals and recording projects. Repertoire ranges from classical masters like Bottesini and Eccles to newly commissioned contemporary works.</p>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-index">ii.</div>
+          <div class="service-title">
+            <h3>Teaching &amp; Mentoring</h3>
+            <span class="service-tag">Private Lessons &amp; Masterclasses</span>
+          </div>
+          <div class="service-desc">
+            <p>Tailored private double bass tuition and masterclasses for students of all levels. Lessons draw on Emma's extensive international training and her experience shaping young talent through initiatives like the VCASS Double Bass Day.</p>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-index">iii.</div>
+          <div class="service-title">
+            <h3>Chamber Programs &amp; Residencies</h3>
+            <span class="service-tag">Curated Repertoire</span>
+          </div>
+          <div class="service-desc">
+            <p>Bespoke chamber programs designed to spotlight the unique voice of the double bass. From solo recitals to string quintets, these programs are ideally suited for residencies, house concerts and independent venues.</p>
+          </div>
+        </div>
+
+        <div class="service-row">
+          <div class="service-index">iv.</div>
+          <div class="service-title">
+            <h3>Writing on Music</h3>
+            <span class="service-tag">Essays &amp; Features</span>
+          </div>
+          <div class="service-desc">
+            <p>Engaging articles, program notes and commentary on classical music history and contemporary double bass repertoire, as featured in publications like CutCommon magazine.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-strip reveal">
+        <div class="marquee" aria-hidden="true">
+          <span>Melbourne Chamber Orchestra <span class="dot">·</span></span>
+          <span>Melbourne Symphony Orchestra <span class="dot">·</span></span>
+          <span>New Zealand Symphony Orchestra <span class="dot">·</span></span>
+          <span>Australian Chamber Orchestra (ACO2) <span class="dot">·</span></span>
+          <span>Australian World Orchestra <span class="dot">·</span></span>
+          <span>Orchestra Victoria <span class="dot">·</span></span>
+          <span>Australian National Academy of Music <span class="dot">·</span></span>
+          <span>Melbourne Chamber Orchestra <span class="dot">·</span></span>
+          <span>Melbourne Symphony Orchestra <span class="dot">·</span></span>
+          <span>New Zealand Symphony Orchestra <span class="dot">·</span></span>
+          <span>Australian Chamber Orchestra (ACO2) <span class="dot">·</span></span>
+          <span>Australian World Orchestra <span class="dot">·</span></span>
+          <span>Orchestra Victoria <span class="dot">·</span></span>
+          <span>Australian National Academy of Music <span class="dot">·</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PORTFOLIO ================= -->
   <section class="section" id="portfolio">
     <div class="wrap">
       <div class="section-head reveal">
@@ -548,145 +1092,235 @@
           <p class="eyebrow">Portfolio</p>
           <h2>Selected programs<br>&amp; performances.</h2>
         </div>
+        <p class="section-note">A snapshot of recent residencies, solo appearances and long-standing creative collaborations.</p>
       </div>
 
       <div class="cards-grid reveal">
-        <div class="card card-img-wrap">
-          <img src="images/emma-ballarat.jpg" alt="Emma in Ballarat" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="img-placeholder" style="display:none;">Ballarat, Victoria</div>
-          <div class="card-img-content">
-            <span class="card-year">Wildlife &amp; Regional</span>
-            <h4>Ballarat Sanctuary &amp; Regional Tours</h4>
-            <p>Capturing memorable moments and community engagements amid regional wildlife initiatives across Victoria.</p>
-            <div class="card-loc">Ballarat, Victoria</div>
-          </div>
+        <div class="card">
+          <span class="card-year">Residency</span>
+          <h4>Tempo Rubato — Four-Concert March Residency</h4>
+          <p>A month-long residency featuring four distinct Monday-night programs exploring solo bass repertoire, cello-and-bass duos, string quintets, and a celebration of Melbourne's vibrant female and gender-diverse bass community.</p>
+          <div class="card-loc">Tempo Rubato, Brunswick</div>
         </div>
 
-        <div class="card card-img-wrap">
-          <img src="images/nightingale-mco.jpg" alt="Melbourne Chamber Orchestra performance" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="img-placeholder" style="display:none;">Nightingale Sonata</div>
-          <div class="card-img-content">
-            <span class="card-year">Concert Series</span>
-            <h4>Nightingale — Soloist, Contrabass Sonata in G minor</h4>
-            <p>Featured as a soloist performing Henry Eccles's <em>Contrabass Sonata</em> within a program directed by Guest Director Donald Nicolson.</p>
-            <div class="card-loc">Melbourne Chamber Orchestra</div>
-          </div>
+        <div class="card">
+          <span class="card-year">Concert Series</span>
+          <h4>Nightingale — Soloist, Contrabass Sonata in G minor</h4>
+          <p>Featured as a soloist performing Henry Eccles's <em>Contrabass Sonata</em> within a program directed by Guest Director Donald Nicolson, touring to the Melbourne Recital Centre, Pakenham and Geelong.</p>
+          <div class="card-loc">Melbourne Chamber Orchestra</div>
         </div>
 
-        <div class="card card-img-wrap">
-          <img src="images/women-in-bass-melbourne.jpg" alt="Women in Bass Melbourne" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="img-placeholder" style="display:none;">Women in Bass</div>
-          <div class="card-img-content">
-            <span class="card-year">Residency &amp; Community</span>
-            <h4>Tempo Rubato — Women in Bass Residency</h4>
-            <p>A four-concert residency celebrating and showcasing Melbourne's vibrant female and gender-diverse double bass community.</p>
-            <div class="card-loc">Tempo Rubato, Brunswick</div>
-          </div>
+        <div class="card">
+          <span class="card-year">Education</span>
+          <h4>VCASS Double Bass Day</h4>
+          <p>Founder of a prominent annual workshop bringing together student bass players and educators from across Victoria for a day of collaborative masterclasses and a massed ensemble performance.</p>
+          <div class="card-loc">Victorian College of the Arts Secondary School</div>
+        </div>
+
+        <div class="card">
+          <span class="card-year">Research</span>
+          <h4>Collaborative Contrabass</h4>
+          <p>A doctoral research project at the Queensland Conservatorium, Griffith University, dedicated to researching, performing and championing underrepresented chamber music written for the double bass.</p>
+          <div class="card-loc">Doctor of Musical Arts</div>
+        </div>
+
+        <div class="card">
+          <span class="card-year">Fellowship</span>
+          <h4>Peter Mitchell Churchill Fellowship</h4>
+          <p>An intensive two-month period of advanced study and professional mentoring in Paris under the celebrated French double bassist and pedagogue Thierry Barbé.</p>
+          <div class="card-loc">Paris, France · 2012</div>
+        </div>
+
+        <div class="card">
+          <span class="card-year">Writing</span>
+          <h4>CutCommon Contributor</h4>
+          <p>Regular journalism and feature writing for <em>CutCommon</em>, highlighting the new generation of composers, performers and arts administrators in the classical music industry.</p>
+          <div class="card-loc">CutCommon Magazine</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Writing & Media Section -->
-  <section class="section" id="writing">
+  <!-- ================= PUBLICATIONS ================= -->
+  <section class="section" id="publications">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
-          <p class="eyebrow">Writing &amp; Insights</p>
-          <h2>Words, essays &amp;<br>program notes.</h2>
+          <p class="eyebrow">Publications</p>
+          <h2>Writing &amp;<br>research.</h2>
         </div>
+        <p class="section-note">Doctoral research and music journalism exploring the double bass and the artists shaping its future.</p>
       </div>
 
-      <div class="cards-grid reveal">
-        <div class="card">
-          <span class="card-year">Research &amp; Essay</span>
-          <h4>The Collaborative Contrabass</h4>
-          <p>Investigating the expanding role of the double bass as an agile solo instrument and collaborative partner in contemporary chamber music repertoire.</p>
-          <div class="card-loc">Doctoral Research &amp; Publications</div>
+      <a href="https://research-repository.griffith.edu.au/items/31916125-5f49-53b4-bfce-d071db3f1502/full" target="_blank" rel="noopener" class="thesis-card reveal">
+        <div class="thesis-meta">
+          <span class="thesis-tag">Doctor of Musical Arts · Queensland Conservatorium, Griffith University · 2017</span>
+          <h3>Collaborative Contrabass: Exploring the Role of the Double Bass in Chamber Music Through Performance</h3>
+          <p>A practice-led doctoral project pairing musicological research with four public chamber recitals, tracing the double bass's role in chamber music from the eighteenth century to newly commissioned works — including a study of the historical Viennese tuning system and its Classical-era repertoire, the instrument's changing place in the Romantic piano quintet, and contemporary duets written for double bass over the last three decades. Supervised by Stephen Emmerson and Peter Roennfeldt.</p>
         </div>
+        <span class="thesis-link">View on Griffith Research Repository →</span>
+      </a>
 
-        <div class="card">
-          <span class="card-year">Journalism</span>
-          <h4>CutCommon &amp; Arts Criticism</h4>
-          <p>Insightful reviews, artist profiles, and critical commentaries examining the classical music landscape in Australia.</p>
-          <div class="card-loc">CutCommon Classical Music Magazine</div>
-        </div>
+      <div class="pub-list reveal">
+        <a href="https://www.cutcommonmag.com/the-story-of-australias-first-female-mechanic-will-be-brought-to-life-on-bass/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">Jul 2022</span>
+          <span class="pub-title">The story of Australia's first female mechanic will be brought to life on bass</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a href="https://www.cutcommonmag.com/live-review-emma-checks-out-the-anam-set-festival/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">May 2022</span>
+          <span class="pub-title">Live review: the ANAM Set Festival, opening night</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a href="https://www.cutcommonmag.com/dr-aristea-mellos-as-women-were-still-fighting-to-be-seen-and-heard/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">Sep 2019</span>
+          <span class="pub-title">Dr Aristea Mellos: "As women, we're still fighting to be seen and heard"</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a href="https://www.cutcommonmag.com/the-melbourne-ensemble-brings-chamber-music-to-an-urban-winery/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">Jun 2019</span>
+          <span class="pub-title">The Melbourne Ensemble brings chamber music to an urban winery</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a href="https://www.cutcommonmag.com/strelitzia-piano-trio-breaks-onto-the-scene-in-victoria/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">Mar 2019</span>
+          <span class="pub-title">Strelitzia Piano Trio breaks onto the scene in Victoria</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a href="https://www.cutcommonmag.com/meet-the-women-in-bass/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">Mar 2019</span>
+          <span class="pub-title">Meet the Women in Bass</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        <div class="card">
-          <span class="card-year">Program Notes</span>
-          <h4>MCO Concert Annotations</h4>
-          <p>In-depth program commentary for Melbourne Chamber Orchestra seasons, illuminating historical context and tonal narratives for audiences.</p>
-          <div class="card-loc">Melbourne Chamber Orchestra</div>
+  <!-- ================= BOOKING ================= -->
+  <section class="section booking" id="booking">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Availability</p>
+          <h2>Book a call.</h2>
         </div>
+        <p class="section-note">If you would like to book a performance, enquire about private lessons, or discuss a potential chamber residency, please select a convenient time below.</p>
       </div>
 
-      <!-- Extended Essay Section -->
-      <div class="essay-grid reveal">
-        <div class="essay-card">
-          <span class="card-year">Featured Essay</span>
-          <h3>Beyond the Continuo Line: Reimagining the Bass</h3>
-          <p>For centuries, the double bass was relegated to the foundational shadows of the orchestra—reinforcing the cello line an octave lower, anchoring harmony, and rarely stepping into the melodic light. Yet today's performers are dismantling those historical boundaries.</p>
-          <p>Through specialized technical agility, modified tuning approaches, and deliberate commissioning of solo repertoire, the modern bassist operates as an equal partner in dialogue with violins, woodwinds, and pianists alike. This essay explores the pedagogical and performance shifts driving this renaissance.</p>
-          <div class="essay-meta">
-            <span>Published in Writing Archive</span>
-            <span>Read Full Article →</span>
-          </div>
+      <div class="booking-inner reveal">
+        <div class="booking-copy">
+          <p>Schedule a quick introductory consultation or planning session directly using the calendar. Select the topic that best matches your enquiry:</p>
+          <ul class="booking-list">
+            <li>Performance &amp; engagement enquiries</li>
+            <li>Prospective student consultations</li>
+            <li>Chamber program &amp; residency planning</li>
+          </ul>
         </div>
 
-        <div class="essay-card">
-          <span class="card-year">Pedagogical Insight</span>
-          <h3>Fostering Community: The Vision Behind VCASS Double Bass Day</h3>
-          <p>The psychological hurdle of playing an instrument larger than oneself can be daunting for young students. That realization sparked the creation of dedicated community events like the Victorian College of the Arts Secondary School (VCASS) Double Bass Day.</p>
-          <p>By bringing together players ranging from primary school beginners to professional orchestral mentors, these gatherings transform what is traditionally an isolating, solitary instrument into a shared, joyful collective experience.</p>
-          <div class="essay-meta">
-            <span>Education &amp; Mentorship</span>
-            <span>Read Full Article →</span>
+        <div class="calendly-frame">
+          <!--
+            CALENDLY SETUP:
+            Replace the data-url below with your real Calendly link, e.g.
+            data-url="https://calendly.com/your-username/consultation"
+            The scheduler loads automatically once a real link is set —
+            no other changes needed, and nothing loads until you do.
+          -->
+          <div class="calendly-embed" id="calendlyEmbed" data-url="https://calendly.com/your-username/consultation">
+            <div class="calendly-placeholder" id="calendlyPlaceholder">
+              <strong>Interactive Scheduler</strong>
+              <span>Add your Calendly link in the data-url attribute above to enable live booking here.</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- ================= CONTACT ================= -->
   <section class="section" id="contact">
     <div class="wrap">
       <div class="section-head reveal">
         <div>
           <p class="eyebrow">Contact</p>
-          <h2>Get in touch for<br>performances, writing &amp; teaching.</h2>
+          <h2>Get in touch.</h2>
         </div>
+        <p class="section-note">Based in Melbourne, available for performance, teaching and writing engagements across Australia and internationally.</p>
       </div>
 
-      <div class="about-grid reveal">
-        <div class="about-copy">
-          <p>Whether you are looking to collaborate on chamber projects, commission program notes or essays, inquire about double bass lessons, or discuss upcoming concert engagements, please reach out directly.</p>
-          <p>Based in <strong>Melbourne, Victoria</strong> and available for national and international engagements.</p>
-          <div style="margin-top: 2rem;">
-            <a href="mailto:emma@emmasullivan.com.au" class="btn btn-solid">Email Emma Directly</a>
+      <div class="contact-inner reveal">
+        <div class="contact-info">
+          <p>Whether you are looking to book an orchestra principal, inquire about double bass lessons, commission program notes, or collaborate on a chamber residency, send a message below.</p>
+          
+          <div class="contact-detail">
+            <div>
+              <span class="label">Email</span>
+              <div><a href="mailto:hello@emmasullivanbass.com" class="value">hello@emmasullivanbass.com</a></div>
+            </div>
+            <div>
+              <span class="label">Location</span>
+              <div class="value">Melbourne, Australia</div>
+            </div>
+          </div>
+
+          <div class="social-row">
+            <a href="https://instagram.com" target="_blank" rel="noopener">Instagram ↗</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn ↗</a>
           </div>
         </div>
-        <div class="hero-side" style="border-left: 1px solid var(--line); padding-left: 2rem;">
-          <p style="font-size: 1.1rem; color: var(--cream); font-weight: 400; margin-bottom: 1rem;">Direct Channels</p>
-          <p style="margin-bottom: 0.6rem;"><strong>Email:</strong> emma@emmasullivan.com.au</p>
-          <p style="margin-bottom: 0.6rem;"><strong>Location:</strong> Melbourne, Australia</p>
-          <p><strong>Orchestra:</strong> Melbourne Chamber Orchestra</p>
-        </div>
+
+        <!-- 
+          CONTACT FORM: Powered by Web3Forms (free, no backend required).
+          Replace YOUR_WEB3FORMS_ACCESS_KEY with your actual access key from https://web3forms.com
+        -->
+        <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+          <input type="hidden" name="subject" value="New enquiry from emmasullivanbass.com">
+          <input type="checkbox" name="botcheck" class="hp-field">
+
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Your Name *</label>
+              <input type="text" id="name" name="name" placeholder="Name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="email@example.com" required>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="enquiry">Enquiry Type *</label>
+            <select id="enquiry" name="enquiry_type" required>
+              <option value="" disabled selected>Select an option...</option>
+              <option value="Performance booking">Performance booking</option>
+              <option value="Lesson enquiry">Lesson enquiry</option>
+              <option value="Chamber program / residency">Chamber program / residency</option>
+              <option value="Writing / press">Writing / press</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" placeholder="Tell me about your project, dates, or enquiry..." required></textarea>
+          </div>
+
+          <div class="form-foot">
+            <span class="form-note">Fields marked with an asterisk are required. Your details will only be used to respond to your message.</span>
+            <button type="submit" class="btn btn-solid">Send message</button>
+          </div>
+          <div class="form-status" id="formStatus" aria-live="polite"></div>
+        </form>
       </div>
     </div>
   </section>
+
 </main>
 
+<!-- ================= FOOTER ================= -->
 <footer>
   <div class="wrap footer-inner">
-    <div class="footer-mark">
-      <svg class="true-bass-clef" viewBox="0 0 32 32" style="width:16px;height:16px;">
-        <path d="M10 5c3.87 0 7 3.13 7 7 0 2.45-1.3 4.6-3.26 5.78C14.7 18.7 15.5 20.08 15.5 21.6c0 3.53-2.87 6.4-6.4 6.4-3.53 0-6.4-2.87-6.4-6.4 0-1.52.8-2.9 1.76-3.82C5.3 16.6 4 14.45 4 12c0-3.87 3.13-7 7-7zm0 2c-2.76 0-5 2.24-5 5 0 1.9 1.05 3.55 2.62 4.41l.38.21-.21.38C7.15 18.25 6.5 19.85 6.5 21.6c0 2.43 1.97 4.4 4.4 4.4 2.43 0 4.4-1.97 4.4-4.4 0-1.75-.65-3.35-1.79-4.6l-.21-.38.38-.21C13.95 15.55 15 13.9 15 12c0-2.76-2.24-5-5-5z"/>
-        <circle cx="21" cy="11" r="1.5"/>
-        <circle cx="21" cy="15" r="1.5"/>
-        <path d="M21 7v12" stroke="var(--brass)" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-      Emma Sullivan — Double Bassist, Educator &amp; Writer
-    </div>
+    <div class="footer-mark">Emma Sullivan — Double Bass</div>
     <div class="footer-meta">
       <span>© 2026 Emma Sullivan</span>
       <a href="#top" class="back-to-top">Back to top ↑</a>
@@ -694,33 +1328,102 @@
   </div>
 </footer>
 
+<!-- Calendly script is injected dynamically by the script below, only once a real link is set -->
+
 <script>
   // Mobile Nav Toggle
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
+
   navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    navToggle.textContent = isOpen ? '✕' : '☰';
   });
 
-  // Scroll header border & reveal observer
-  const header = document.getElementById('siteNav');
+  // Close mobile nav on link click
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.textContent = '☰';
+    });
+  });
+
+  // Header scroll state
+  const siteNav = document.getElementById('siteNav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
-      header.classList.add('scrolled');
+      siteNav.classList.add('scrolled');
     } else {
-      header.classList.remove('scrolled');
+      siteNav.classList.remove('scrolled');
     }
   });
 
-  const observer = new IntersectionObserver((entries) => {
+  // Intersection Observer for scroll reveal animations
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // Calendly: only load the widget once a real link replaces the placeholder,
+  // so nothing tries to fetch a fake URL (which would show Calendly's own 404 page).
+  (function initCalendly(){
+    var embed = document.getElementById('calendlyEmbed');
+    if (!embed) return;
+    var url = embed.getAttribute('data-url') || '';
+    var isPlaceholder = !url || url.indexOf('your-username') !== -1;
+    if (isPlaceholder) return;
+
+    embed.innerHTML = '';
+    embed.classList.add('calendly-inline-widget');
+    embed.style.minWidth = '100%';
+    embed.style.height = '620px';
+
+    var script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+  })();
+
+  // Web3Forms AJAX Submission Handler
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+
+  contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(contactForm);
+    formStatus.textContent = 'Sending message...';
+    formStatus.className = 'form-status';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    })
+    .then(async (response) => {
+      let json = await response.json();
+      if (response.status == 200) {
+        formStatus.textContent = 'Thank you! Your message has been sent successfully.';
+        formStatus.className = 'form-status ok';
+        contactForm.reset();
+      } else {
+        formStatus.textContent = json.message || 'Something went wrong. Please try again later.';
+        formStatus.className = 'form-status err';
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      formStatus.textContent = 'Network error. Please check your connection and try again.';
+      formStatus.className = 'form-status err';
+    });
+  });
 </script>
 </body>
 </html>
