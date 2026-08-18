@@ -314,7 +314,7 @@
     display:flex; justify-content: space-between; align-items: flex-end;
     gap: 2rem; margin-bottom: 3.5rem; flex-wrap: wrap;
   }
-  .section-head h2{ font-size: clamp(2.1rem, 4vw, 3.1rem); font-weight: 450; max-width: 16ch; }
+  .section-head h2{ font-size: clamp(2.1rem, 4vw, 3.1rem); font-weight: 450; max-width: 18ch; }
 
   /* About */
   .about-grid{ display:grid; grid-template-columns: 0.8fr 1.2fr; gap: 3.5rem; align-items: start; }
@@ -374,7 +374,46 @@
     border-bottom: 1px solid var(--line);
   }
 
-  @media (max-width: 900px){ .cards-grid{ grid-template-columns: 1fr 1fr; } }
+  /* Essay / Extended Writing Layout */
+  .essay-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-top: 2rem;
+  }
+  .essay-card {
+    background: var(--ink);
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .essay-card h3 {
+    font-size: 1.6rem;
+    margin-top: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+  .essay-card p {
+    font-size: 0.95rem;
+    color: var(--cream-dim);
+    font-weight: 300;
+    margin-bottom: 1.2rem;
+  }
+  .essay-meta {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 900px){ 
+    .cards-grid{ grid-template-columns: 1fr 1fr; } 
+    .essay-grid { grid-template-columns: 1fr; }
+  }
   @media (max-width: 620px){ .cards-grid{ grid-template-columns: 1fr; } }
 
   /* Footer */
@@ -495,7 +534,7 @@
         <div class="about-copy reveal">
           <p>Dr. Emma Sullivan is a Melbourne-based double bassist, educator and writer, originally from Toowoomba, Queensland. She has served as the <strong>Principal Double Bass and Education Manager of the Melbourne Chamber Orchestra</strong> since 2009.</p>
           <p>Equally at home on the orchestral stage and in intimate chamber settings, Emma has performed extensively with major Australian and New Zealand orchestras, including the Melbourne Symphony Orchestra and the New Zealand Symphony Orchestra.</p>
-          <p>Alongside her performing career, Emma is an active writer and educator, contributing analytical program notes, articles on non-functional requirements in technical education, and fostering the next generation of string players across Victoria.</p>
+          <p>Alongside her performing career, Emma is an active writer and educator, contributing analytical program notes, articles on collaborative contrabass practice, and fostering the next generation of string players across Victoria through initiatives such as the VCASS Double Bass Day.</p>
         </div>
       </div>
     </div>
@@ -539,8 +578,8 @@
           <div class="img-placeholder" style="display:none;">Women in Bass</div>
           <div class="card-img-content">
             <span class="card-year">Residency &amp; Community</span>
-            <h4>Tempo Rubato — Women in Bass</h4>
-            <p>A celebration and showcase of Melbourne's vibrant female and gender-diverse double bass community.</p>
+            <h4>Tempo Rubato — Women in Bass Residency</h4>
+            <p>A four-concert residency celebrating and showcasing Melbourne's vibrant female and gender-diverse double bass community.</p>
             <div class="card-loc">Tempo Rubato, Brunswick</div>
           </div>
         </div>
@@ -560,24 +599,49 @@
 
       <div class="cards-grid reveal">
         <div class="card">
-          <span class="card-year">Essay</span>
-          <h4>The Voice of the Low End</h4>
-          <p>Exploring the historical evolution of the double bass from continuo foundation to expressive solo voice in contemporary orchestral repertoire.</p>
-          <div class="card-loc">Published Writings</div>
+          <span class="card-year">Research &amp; Essay</span>
+          <h4>The Collaborative Contrabass</h4>
+          <p>Investigating the expanding role of the double bass as an agile solo instrument and collaborative partner in contemporary chamber music repertoire.</p>
+          <div class="card-loc">Doctoral Research &amp; Publications</div>
         </div>
 
         <div class="card">
-          <span class="card-year">Education</span>
-          <h4>NFRs in Technical Architecture</h4>
-          <p>Bridging the gap between creative discipline and system resilience through instructional writing on non-functional requirements.</p>
-          <div class="card-loc">LinkedIn Learning</div>
+          <span class="card-year">Journalism</span>
+          <h4>CutCommon &amp; Arts Criticism</h4>
+          <p>Insightful reviews, artist profiles, and critical commentaries examining the classical music landscape in Australia.</p>
+          <div class="card-loc">CutCommon Classical Music Magazine</div>
         </div>
 
         <div class="card">
           <span class="card-year">Program Notes</span>
           <h4>MCO Concert Annotations</h4>
-          <p>In-depth program commentary for Melbourne Chamber Orchestra seasons, illuminating historical context for audiences.</p>
+          <p>In-depth program commentary for Melbourne Chamber Orchestra seasons, illuminating historical context and tonal narratives for audiences.</p>
           <div class="card-loc">Melbourne Chamber Orchestra</div>
+        </div>
+      </div>
+
+      <!-- Extended Essay Section -->
+      <div class="essay-grid reveal">
+        <div class="essay-card">
+          <span class="card-year">Featured Essay</span>
+          <h3>Beyond the Continuo Line: Reimagining the Bass</h3>
+          <p>For centuries, the double bass was relegated to the foundational shadows of the orchestra—reinforcing the cello line an octave lower, anchoring harmony, and rarely stepping into the melodic light. Yet today's performers are dismantling those historical boundaries.</p>
+          <p>Through specialized technical agility, modified tuning approaches, and deliberate commissioning of solo repertoire, the modern bassist operates as an equal partner in dialogue with violins, woodwinds, and pianists alike. This essay explores the pedagogical and performance shifts driving this renaissance.</p>
+          <div class="essay-meta">
+            <span>Published in Writing Archive</span>
+            <span>Read Full Article →</span>
+          </div>
+        </div>
+
+        <div class="essay-card">
+          <span class="card-year">Pedagogical Insight</span>
+          <h3>Fostering Community: The Vision Behind VCASS Double Bass Day</h3>
+          <p>The psychological hurdle of playing an instrument larger than oneself can be daunting for young students. That realization sparked the creation of dedicated community events like the Victorian College of the Arts Secondary School (VCASS) Double Bass Day.</p>
+          <p>By bringing together players ranging from primary school beginners to professional orchestral mentors, these gatherings transform what is traditionally an isolating, solitary instrument into a shared, joyful collective experience.</p>
+          <div class="essay-meta">
+            <span>Education &amp; Mentorship</span>
+            <span>Read Full Article →</span>
+          </div>
         </div>
       </div>
     </div>
@@ -595,7 +659,7 @@
 
       <div class="about-grid reveal">
         <div class="about-copy">
-          <p>Whether you are looking to collaborate on chamber projects, commission program notes, inquire about double bass lessons, or discuss upcoming concert engagements, please reach out directly.</p>
+          <p>Whether you are looking to collaborate on chamber projects, commission program notes or essays, inquire about double bass lessons, or discuss upcoming concert engagements, please reach out directly.</p>
           <p>Based in <strong>Melbourne, Victoria</strong> and available for national and international engagements.</p>
           <div style="margin-top: 2rem;">
             <a href="mailto:emma@emmasullivan.com.au" class="btn btn-solid">Email Emma Directly</a>
