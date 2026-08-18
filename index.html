@@ -278,14 +278,15 @@
     padding-right: 15px;
     display: flex;
     align-items: center;
+    background: var(--ink); /* Opaque cover over lines so clef sits neatly */
   }
   .staff-clef svg {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     fill: var(--brass);
   }
 
-  /* Flowing musical notes & bar lines after the clef */
+  /* Flowing musical notes & bar lines following directly */
   .staff-flow {
     position: relative;
     flex-grow: 1;
@@ -298,9 +299,7 @@
     position: absolute;
     top: 0; bottom: 0; left: 0; right: 0;
     background-image: 
-      /* Bar lines */
       linear-gradient(90deg, var(--brass) 1px, transparent 1px),
-      /* Quarter/eighth note heads sitting on staff lines */
       radial-gradient(ellipse at center, var(--brass) 3.5px, transparent 4px);
     background-size: 120px 100%, 40px 100%;
     background-position: 0 0, 20px 14px;
@@ -398,26 +397,38 @@
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
     <a href="#top" class="nav-mark">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.5 3C8.46 3 6 5.46 6 8.5c0 2.22 1.3 4.12 3.18 5.01-.13.43-.23.88-.28 1.34-2.12-.4-3.75-2.23-3.75-4.45 0-2.48 2.02-4.5 4.5-4.5s4.5 2.02 4.5 4.5c0 1.95-1.26 3.6-3 4.24v2.58c3.27-.61 5.75-3.44 5.75-6.82 0-3.87-3.13-7-7-7zm0 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-3 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm6 0c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"/></svg>
+      <svg viewBox="0 0 512 512" aria-hidden="true" style="width:20px;height:20px;fill:var(--brass-bright);">
+        <path d="M256 96c-88.366 0-160 71.634-160 160 0 53.03 25.534 99.986 64.938 129.531l13.938 10.563-14.875 11.25C136.216 385.602 112 324.965 112 256c0-79.529 64.471-144 144-144s144 64.471 144 144-64.471 144-144 144c-17.677 0-32 14.323-32 32s14.323 32 32 32c114.875 0 208-93.125 208-208S370.875 96 256 96zm-32 208c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32zm64-96c17.673 0 32-14.327 32-32s-14.327-32-32-32-32 14.327-32 32 14.327 32 32 32z"/>
+        <circle cx="312" cy="224" r="12"/>
+        <circle cx="312" cy="272" r="12"/>
+      </svg>
       Emma Sullivan <span>·</span> Double Bass
     </a>
     <nav>
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#writing">Writing &amp; Media</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
   </div>
 </header>
 
 <main id="top">
+  <!-- Hero Section -->
   <section class="hero wrap">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow">Melbourne, Australia</p>
+        <p class="eyebrow hero-eyebrow">Melbourne, Australia</p>
         <h1>Emma<br>Sullivan<em>.</em></h1>
         <p class="hero-role">Principal Double Bass of the Melbourne Chamber Orchestra, Emma Sullivan is an acclaimed <strong>bassist, educator, and writer</strong> with over two decades of experience on major stages across Australia, New Zealand, and the United States.</p>
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn btn-solid">Explore Portfolio</a>
+          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        </div>
       </div>
       <div class="hero-side">
         <p>Dedicated to elevating the voice of the double bass through world-class performance, chamber residencies, mentorship, and insightful music journalism.</p>
@@ -429,28 +440,28 @@
       </div>
     </div>
 
-    <!-- Clean Sheet Music Staff with True Bass Clef at Start -->
+    <!-- Sheet Music Staff Bar with Accurate Bass Clef -->
     <div class="hero-bottom-wrap">
       <div class="staff-container">
-        <!-- 5 Continuous Staff Lines -->
+        <!-- 5 Staff Lines -->
         <div class="staff-lines">
           <span></span><span></span><span></span><span></span><span></span>
         </div>
-        <!-- Accurate Bass Clef SVG at the start -->
+        <!-- Bass Clef SVG -->
         <div class="staff-clef">
           <svg viewBox="0 0 512 512" aria-hidden="true">
             <path d="M256 96c-88.366 0-160 71.634-160 160 0 53.03 25.534 99.986 64.938 129.531l13.938 10.563-14.875 11.25C136.216 385.602 112 324.965 112 256c0-79.529 64.471-144 144-144s144 64.471 144 144-64.471 144-144 144c-17.677 0-32 14.323-32 32s14.323 32 32 32c114.875 0 208-93.125 208-208S370.875 96 256 96zm-32 208c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32zm64-96c17.673 0 32-14.327 32-32s-14.327-32-32-32-32 14.327-32 32 14.327 32 32 32z"/>
-            <!-- Bass clef dots -->
             <circle cx="312" cy="224" r="12"/>
             <circle cx="312" cy="272" r="12"/>
           </svg>
         </div>
-        <!-- Flowing notes and bar lines following directly -->
+        <!-- Flowing notes & bar lines -->
         <div class="staff-flow"></div>
       </div>
     </div>
   </section>
 
+  <!-- About Section -->
   <section class="section" id="about">
     <div class="wrap">
       <div class="section-head reveal">
@@ -463,19 +474,23 @@
       <div class="about-grid">
         <div class="reveal">
           <div class="portrait">
-            <img src="images/emma-ballarat.jpg" alt="Emma with wildlife in Ballarat">
+            <!-- Fallback handling for images if local assets are missing -->
+            <img src="images/emma-ballarat.jpg" alt="Emma with wildlife in Ballarat" onerror="this.style.display='none'">
             <span class="portrait-mark">ES</span>
             <span class="portrait-caption">Ballarat, Victoria</span>
           </div>
         </div>
 
         <div class="about-copy reveal">
-          <p>Dr. Emma Sullivan is a Melbourne-based double bassist, educator and writer, originally from Toowoomba, Queensland. She has served as the <strong>Principal Double Bass and Education Manager of the Melbourne Chamber Orchestra</strong> since 2009...</p>
+          <p>Dr. Emma Sullivan is a Melbourne-based double bassist, educator and writer, originally from Toowoomba, Queensland. She has served as the <strong>Principal Double Bass and Education Manager of the Melbourne Chamber Orchestra</strong> since 2009.</p>
+          <p>Equally at home on the orchestral stage and in intimate chamber settings, Emma has performed extensively with major Australian and New Zealand orchestras, including the Melbourne Symphony Orchestra and the New Zealand Symphony Orchestra.</p>
+          <p>Alongside her performing career, Emma is an active writer and educator, contributing analytical program notes, articles on non-functional requirements in technical education, and fostering the next generation of string players across Victoria.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Portfolio Section -->
   <section class="section" id="portfolio">
     <div class="wrap">
       <div class="section-head reveal">
@@ -487,19 +502,19 @@
 
       <div class="cards-grid reveal">
         <div class="card card-img-wrap">
-          <img src="images/emma-ballarat.jpg" alt="Emma with wildlife in Ballarat">
+          <img src="images/emma-ballarat.jpg" alt="Emma in Ballarat" onerror="this.style.display='none'">
           <div class="card-img-content">
             <span class="card-year">Wildlife &amp; Regional</span>
-            <h4>Ballarat Wildlife Sanctuary</h4>
+            <h4>Ballarat Sanctuary &amp; Regional Tours</h4>
             <p>Capturing memorable moments and community engagements amid regional wildlife initiatives across Victoria.</p>
             <div class="card-loc">Ballarat, Victoria</div>
           </div>
         </div>
 
         <div class="card card-img-wrap">
-          <img src="images/nightingale-mco.jpg" alt="Emma performing with Melbourne Chamber Orchestra">
+          <img src="images/nightingale-mco.jpg" alt="Melbourne Chamber Orchestra performance" onerror="this.style.display='none'">
           <div class="card-img-content">
-            <span class="card-year">ConcertSeries</span>
+            <span class="card-year">Concert Series</span>
             <h4>Nightingale — Soloist, Contrabass Sonata in G minor</h4>
             <p>Featured as a soloist performing Henry Eccles's <em>Contrabass Sonata</em> within a program directed by Guest Director Donald Nicolson.</p>
             <div class="card-loc">Melbourne Chamber Orchestra</div>
@@ -507,7 +522,7 @@
         </div>
 
         <div class="card card-img-wrap">
-          <img src="images/women-in-bass-melbourne.jpg" alt="Women in Bass Melbourne community">
+          <img src="images/women-in-bass-melbourne.jpg" alt="Women in Bass Melbourne" onerror="this.style.display='none'">
           <div class="card-img-content">
             <span class="card-year">Residency &amp; Community</span>
             <h4>Tempo Rubato — Women in Bass</h4>
@@ -518,7 +533,87 @@
       </div>
     </div>
   </section>
+
+  <!-- Writing & Media Section -->
+  <section class="section" id="writing">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Writing &amp; Insights</p>
+          <h2>Words, essays &amp;<br>program notes.</h2>
+        </div>
+      </div>
+
+      <div class="cards-grid reveal">
+        <div class="card">
+          <span class="card-year">Essay</span>
+          <h4>The Voice of the Low End</h4>
+          <p>Exploring the historical evolution of the double bass from continuo foundation to expressive solo voice in contemporary orchestral repertoire.</p>
+          <div class="card-loc">Published Writings</div>
+        </div>
+
+        <div class="card">
+          <span class="card-year">Education</span>
+          <h4>NFRs in Technical Architecture</h4>
+          <p>Bridging the gap between creative discipline and system resilience through instructional writing on non-functional requirements.</p>
+          <div class="card-loc">LinkedIn Learning</div>
+        </div>
+
+        <div class="card">
+          <span class="card-year">Program Notes</span>
+          <h4>MCO Concert Annotations</h4>
+          <p>In-depth program commentary for Melbourne Chamber Orchestra seasons, illuminating historical context for audiences.</p>
+          <div class="card-loc">Melbourne Chamber Orchestra</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h2>Get in touch for<br>performances, writing &amp; teaching.</h2>
+        </div>
+      </div>
+
+      <div class="about-grid reveal">
+        <div class="about-copy">
+          <p>Whether you are looking to collaborate on chamber projects, commission program notes, inquire about double bass lessons, or discuss upcoming concert engagements, please reach out directly.</p>
+          <p>Based in <strong>Melbourne, Victoria</strong> and available for national and international engagements.</p>
+          <div style="margin-top: 2rem;">
+            <a href="mailto:emma@emmasullivan.com.au" class="btn btn-solid">Email Emma Directly</a>
+          </div>
+        </div>
+        <div class="hero-side" style="border-left: 1px solid var(--line); padding-left: 2rem;">
+          <p style="font-size: 1.1rem; color: var(--cream); font-weight: 400; margin-bottom: 1rem;">Direct Channels</p>
+          <p style="margin-bottom: 0.6rem;"><strong>Email:</strong> emma@emmasullivan.com.au</p>
+          <p style="margin-bottom: 0.6rem;"><strong>Location:</strong> Melbourne, Australia</p>
+          <p><strong>Orchestra:</strong> Melbourne Chamber Orchestra</p>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-mark">
+      <svg viewBox="0 0 512 512" aria-hidden="true" style="width:18px;height:18px;fill:var(--brass);">
+        <path d="M256 96c-88.366 0-160 71.634-160 160 0 53.03 25.534 99.986 64.938 129.531l13.938 10.563-14.875 11.25C136.216 385.602 112 324.965 112 256c0-79.529 64.471-144 144-144s144 64.471 144 144-64.471 144-144 144c-17.677 0-32 14.323-32 32s14.323 32 32 32c114.875 0 208-93.125 208-208S370.875 96 256 96zm-32 208c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32zm64-96c17.673 0 32-14.327 32-32s-14.327-32-32-32-32 14.327-32 32 14.327 32 32 32z"/>
+        <circle cx="312" cy="224" r="12"/>
+        <circle cx="312" cy="272" r="12"/>
+      </svg>
+      Emma Sullivan — Double Bassist, Educator &amp; Writer
+    </div>
+    <div class="footer-meta">
+      <span>© 2026 Emma Sullivan</span>
+      <a href="#top" class="back-to-top">Back to top ↑</a>
+    </div>
+  </div>
+</footer>
 
 <script>
   // Mobile Nav Toggle
@@ -527,6 +622,26 @@
   navToggle.addEventListener('click', () => {
     navLinks.classList.toggle('open');
   });
+
+  // Simple scroll header border & reveal observer
+  const header = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
