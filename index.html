@@ -237,12 +237,11 @@
     color: var(--cream-dim);
   }
 
-  /* Sheet Music Staff Bar */
+  /* Sheet Music Staff Bar with Clean CSS Bass Clef */
   .hero-bottom-wrap {
     margin-top: 3.5rem;
     width: 100%;
     position: relative;
-    overflow: hidden;
     padding: 10px 0;
   }
   .staff-container {
@@ -270,20 +269,68 @@
     opacity: 0.4;
   }
   
-  /* Accurate Bass Clef at the start of the line */
-  .staff-clef {
+  /* Bass Clef at the very start of the staff lines */
+  .staff-clef-area {
     position: relative;
     z-index: 3;
-    padding-left: 10px;
-    padding-right: 15px;
     display: flex;
     align-items: center;
-    background: var(--ink); /* Opaque cover over lines so clef sits neatly */
+    padding-right: 12px;
+    background: var(--ink); /* opaque background so lines don't bleed through the clef area */
   }
-  .staff-clef svg {
-    width: 36px;
-    height: 36px;
-    fill: var(--brass);
+  
+  /* Pure CSS Bass Clef Symbol (F-clef shape constructed cleanly) */
+  .bass-clef {
+    position: relative;
+    width: 28px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* The main curved body of the F clef */
+  .bass-clef::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 2px;
+    width: 14px;
+    height: 18px;
+    border: 3.5px solid var(--brass);
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-radius: 50% 50% 0 0 / 70% 70% 0 0;
+    transform: rotate(-45deg);
+  }
+  /* The tail curving down */
+  .bass-clef::after {
+    content: "";
+    position: absolute;
+    left: 11px;
+    bottom: 3px;
+    width: 10px;
+    height: 14px;
+    border-left: 3px solid var(--brass);
+    border-bottom: 3px solid var(--brass);
+    border-bottom-left-radius: 80px;
+    transform: rotate(15deg);
+  }
+  /* The two F-clef dots around the 4th line */
+  .bass-dots {
+    position: absolute;
+    right: 0;
+    top: 0; bottom: 0;
+    width: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 9px 0;
+  }
+  .bass-dots span {
+    width: 4px;
+    height: 4px;
+    background: var(--brass);
+    border-radius: 50%;
   }
 
   /* Flowing musical notes & bar lines following directly */
@@ -350,7 +397,7 @@
   .about-copy p{ font-size: 1.03rem; color: var(--cream-dim); font-weight: 300; margin: 0 0 1.3rem; }
   .about-copy p strong{ color: var(--cream); font-weight: 500; }
 
-  /* Cards */
+  /* Cards & Image Fallback Placeholders */
   .cards-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--line); border: 1px solid var(--line); }
   .card{ background: var(--ink); padding: 2.4rem 2rem; display:flex; flex-direction:column; min-height: 280px; }
   .card .card-year{ font-size: 0.75rem; letter-spacing: 0.08em; color: var(--brass); text-transform: uppercase; }
@@ -363,6 +410,21 @@
   .card-img-wrap:hover img { transform: scale(1.03); }
   .card-img-content { padding: 1.8rem 2rem 2rem; display: flex; flex-direction: column; flex-grow: 1; }
   .card-img-content p { flex-grow: 1; }
+
+  /* Visual Placeholder box if actual image files are missing */
+  .img-placeholder {
+    width: 100%;
+    height: 210px;
+    background: linear-gradient(145deg, var(--panel-2), var(--panel));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brass);
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--line);
+  }
 
   @media (max-width: 900px){ .cards-grid{ grid-template-columns: 1fr 1fr; } }
   @media (max-width: 620px){ .cards-grid{ grid-template-columns: 1fr; } }
@@ -397,11 +459,9 @@
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
     <a href="#top" class="nav-mark">
-      <svg viewBox="0 0 512 512" aria-hidden="true" style="width:20px;height:20px;fill:var(--brass-bright);">
-        <path d="M256 96c-88.366 0-160 71.634-160 160 0 53.03 25.534 99.986 64.938 129.531l13.938 10.563-14.875 11.25C136.216 385.602 112 324.965 112 256c0-79.529 64.471-144 144-144s144 64.471 144 144-64.471 144-144 144c-17.677 0-32 14.323-32 32s14.323 32 32 32c114.875 0 208-93.125 208-208S370.875 96 256 96zm-32 208c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32zm64-96c17.673 0 32-14.327 32-32s-14.327-32-32-32-32 14.327-32 32 14.327 32 32 32z"/>
-        <circle cx="312" cy="224" r="12"/>
-        <circle cx="312" cy="272" r="12"/>
-      </svg>
+      <div class="bass-clef" style="width:16px;height:18px;transform:scale(0.8);">
+        <div class="bass-dots"><span></span><span></span></div>
+      </div>
       Emma Sullivan <span>·</span> Double Bass
     </a>
     <nav>
@@ -440,20 +500,18 @@
       </div>
     </div>
 
-    <!-- Sheet Music Staff Bar with Accurate Bass Clef -->
+    <!-- Sheet Music Staff Bar with Clean CSS Bass Clef at Start -->
     <div class="hero-bottom-wrap">
       <div class="staff-container">
         <!-- 5 Staff Lines -->
         <div class="staff-lines">
           <span></span><span></span><span></span><span></span><span></span>
         </div>
-        <!-- Bass Clef SVG -->
-        <div class="staff-clef">
-          <svg viewBox="0 0 512 512" aria-hidden="true">
-            <path d="M256 96c-88.366 0-160 71.634-160 160 0 53.03 25.534 99.986 64.938 129.531l13.938 10.563-14.875 11.25C136.216 385.602 112 324.965 112 256c0-79.529 64.471-144 144-144s144 64.471 144 144-64.471 144-144 144c-17.677 0-32 14.323-32 32s14.323 32 32 32c114.875 0 208-93.125 208-208S370.875 96 256 96zm-32 208c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32zm64-96c17.673 0 32-14.327 32-32s-14.327-32-32-32-32 14.327-32 32 14.327 32 32 32z"/>
-            <circle cx="312" cy="224" r="12"/>
-            <circle cx="312" cy="272" r="12"/>
-          </svg>
+        <!-- Bass Clef Symbol -->
+        <div class="staff-clef-area">
+          <div class="bass-clef" aria-label="Bass Clef">
+            <div class="bass-dots"><span></span><span></span></div>
+          </div>
         </div>
         <!-- Flowing notes & bar lines -->
         <div class="staff-flow"></div>
@@ -474,7 +532,7 @@
       <div class="about-grid">
         <div class="reveal">
           <div class="portrait">
-            <!-- Fallback handling for images if local assets are missing -->
+            <!-- Image with automatic fallback if local path is unavailable -->
             <img src="images/emma-ballarat.jpg" alt="Emma with wildlife in Ballarat" onerror="this.style.display='none'">
             <span class="portrait-mark">ES</span>
             <span class="portrait-caption">Ballarat, Victoria</span>
@@ -502,7 +560,8 @@
 
       <div class="cards-grid reveal">
         <div class="card card-img-wrap">
-          <img src="images/emma-ballarat.jpg" alt="Emma in Ballarat" onerror="this.style.display='none'">
+          <img src="images/emma-ballarat.jpg" alt="Emma in Ballarat" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-placeholder" style="display:none;">Ballarat, Victoria</div>
           <div class="card-img-content">
             <span class="card-year">Wildlife &amp; Regional</span>
             <h4>Ballarat Sanctuary &amp; Regional Tours</h4>
@@ -512,7 +571,8 @@
         </div>
 
         <div class="card card-img-wrap">
-          <img src="images/nightingale-mco.jpg" alt="Melbourne Chamber Orchestra performance" onerror="this.style.display='none'">
+          <img src="images/nightingale-mco.jpg" alt="Melbourne Chamber Orchestra performance" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-placeholder" style="display:none;">Nightingale Sonata</div>
           <div class="card-img-content">
             <span class="card-year">Concert Series</span>
             <h4>Nightingale — Soloist, Contrabass Sonata in G minor</h4>
@@ -522,7 +582,8 @@
         </div>
 
         <div class="card card-img-wrap">
-          <img src="images/women-in-bass-melbourne.jpg" alt="Women in Bass Melbourne" onerror="this.style.display='none'">
+          <img src="images/women-in-bass-melbourne.jpg" alt="Women in Bass Melbourne" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="img-placeholder" style="display:none;">Women in Bass</div>
           <div class="card-img-content">
             <span class="card-year">Residency &amp; Community</span>
             <h4>Tempo Rubato — Women in Bass</h4>
@@ -601,11 +662,9 @@
 <footer>
   <div class="wrap footer-inner">
     <div class="footer-mark">
-      <svg viewBox="0 0 512 512" aria-hidden="true" style="width:18px;height:18px;fill:var(--brass);">
-        <path d="M256 96c-88.366 0-160 71.634-160 160 0 53.03 25.534 99.986 64.938 129.531l13.938 10.563-14.875 11.25C136.216 385.602 112 324.965 112 256c0-79.529 64.471-144 144-144s144 64.471 144 144-64.471 144-144 144c-17.677 0-32 14.323-32 32s14.323 32 32 32c114.875 0 208-93.125 208-208S370.875 96 256 96zm-32 208c-17.673 0-32 14.327-32 32s14.327 32 32 32 32-14.327 32-32-14.327-32-32-32zm64-96c17.673 0 32-14.327 32-32s-14.327-32-32-32-32 14.327-32 32 14.327 32 32 32z"/>
-        <circle cx="312" cy="224" r="12"/>
-        <circle cx="312" cy="272" r="12"/>
-      </svg>
+      <div class="bass-clef" style="width:14px;height:16px;transform:scale(0.7);">
+        <div class="bass-dots"><span></span><span></span></div>
+      </div>
       Emma Sullivan — Double Bassist, Educator &amp; Writer
     </div>
     <div class="footer-meta">
@@ -623,7 +682,7 @@
     navLinks.classList.toggle('open');
   });
 
-  // Simple scroll header border & reveal observer
+  // Scroll header border & reveal observer
   const header = document.getElementById('siteNav');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
