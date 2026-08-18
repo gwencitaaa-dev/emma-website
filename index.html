@@ -267,11 +267,27 @@
   }
 
   /* waveform signature */
+  .waveform-row{
+    display:flex;
+    align-items:center;
+    gap: 1.5rem;
+    margin-top: 3.2rem;
+  }
+  .clef-mark{
+    flex-shrink: 0;
+    width: 46px;
+    height: 90px;
+    opacity: 0.92;
+  }
+  .clef-mark path,
+  .clef-mark circle{
+    fill: var(--brass-bright);
+  }
   .waveform{
     width: 100%;
     height: 90px;
-    margin-top: 3.2rem;
     display:block;
+    flex: 1;
   }
   .waveform path{
     fill:none;
@@ -871,6 +887,9 @@
     }
     .form-row{ grid-template-columns: 1fr; }
     .credentials{ grid-template-columns: 1fr 1fr; }
+    .clef-mark{ width: 32px; height: 64px; }
+    .waveform-row{ gap: 0.9rem; }
+    .waveform{ height: 64px; }
   }
 
   ::selection{ background: var(--brass); color: #0c2b33; }
@@ -925,10 +944,19 @@
       </div>
     </div>
 
-    <svg class="waveform" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
-      <path class="w2" d="M0,45 C 60,10 120,80 180,45 C 240,10 300,80 360,45 C 420,10 480,80 540,45 C 600,10 660,80 720,45 C 780,10 840,80 900,45 C 960,10 1020,80 1080,45 C 1140,10 1200,45 1200,45" />
-      <path class="animated" d="M0,45 C 40,20 80,70 120,45 C 160,20 200,70 240,45 C 280,20 320,70 360,45 C 400,20 440,70 480,45 C 520,20 560,70 600,45 C 640,20 680,70 720,45 C 760,20 800,70 840,45 C 880,20 920,70 960,45 C 1000,20 1040,70 1080,45 C 1120,20 1160,70 1200,45" />
-    </svg>
+    <div class="waveform-row">
+      <svg class="clef-mark" viewBox="0 0 60 120" aria-hidden="true">
+        <!-- Bass (F) clef, hand-drawn -->
+        <path d="M20 14 C34 14 42 24 42 36 C42 50 32 60 18 66 C30 60 34 52 34 44 C34 34 27 27 18 27 C10 27 4 33 4 41 C4 47 8 51 13 51 C17 51 20 48 20 44 C20 41 18 39 15 39 C13.5 39 12.3 39.8 11.6 40.9 C11.2 39.9 12.2 34 20 34 C27 34 31 39 31 45.5 C31 55 22 61 12 61 C4.5 61 0 55 0 48 C0 32 12 14 20 14 Z" />
+        <circle cx="48" cy="20" r="4"/>
+        <circle cx="48" cy="32" r="4"/>
+      </svg>
+
+      <svg class="waveform" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
+        <path class="w2" d="M0,45 C 60,10 120,80 180,45 C 240,10 300,80 360,45 C 420,10 480,80 540,45 C 600,10 660,80 720,45 C 780,10 840,80 900,45 C 960,10 1020,80 1080,45 C 1140,10 1200,45 1200,45" />
+        <path class="animated" d="M0,45 C 40,20 80,70 120,45 C 160,20 200,70 240,45 C 280,20 320,70 360,45 C 400,20 440,70 480,45 C 520,20 560,70 600,45 C 640,20 680,70 720,45 C 760,20 800,70 840,45 C 880,20 920,70 960,45 C 1000,20 1040,70 1080,45 C 1120,20 1160,70 1200,45" />
+      </svg>
+    </div>
   </section>
 
   <!-- ================= ABOUT ================= -->
@@ -1119,7 +1147,7 @@
         <p class="section-note">Doctoral research and music journalism exploring the double bass and the artists shaping its future.</p>
       </div>
 
-      <a href="https://research-repository.griffith.edu.au/" target="_blank" rel="noopener" class="thesis-card reveal">
+      <a href="https://research-repository.griffith.edu.au/items/31916125-5f49-53b4-bfce-d071db3f1502/full" target="_blank" rel="noopener" class="thesis-card reveal">
         <div class="thesis-meta">
           <span class="thesis-tag">Doctor of Musical Arts · Queensland Conservatorium, Griffith University · 2017</span>
           <h3>Collaborative Contrabass: Exploring the Role of the Double Bass in Chamber Music Through Performance</h3>
@@ -1129,32 +1157,32 @@
       </a>
 
       <div class="pub-list reveal">
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/the-story-of-australias-first-female-mechanic-will-be-brought-to-life-on-bass/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Jul 2022</span>
           <span class="pub-title">The story of Australia's first female mechanic will be brought to life on bass</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/live-review-emma-checks-out-the-anam-set-festival/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">May 2022</span>
           <span class="pub-title">Live review: the ANAM Set Festival, opening night</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/dr-aristea-mellos-as-women-were-still-fighting-to-be-seen-and-heard/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Sep 2019</span>
           <span class="pub-title">Dr Aristea Mellos: "As women, we're still fighting to be seen and heard"</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/the-melbourne-ensemble-brings-chamber-music-to-an-urban-winery/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Jun 2019</span>
           <span class="pub-title">The Melbourne Ensemble brings chamber music to an urban winery</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/strelitzia-piano-trio-breaks-onto-the-scene-in-victoria/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Mar 2019</span>
           <span class="pub-title">Strelitzia Piano Trio breaks onto the scene in Victoria</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/meet-the-women-in-bass/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Mar 2019</span>
           <span class="pub-title">Meet the Women in Bass</span>
           <span class="pub-outlet">CutCommon ↗</span>
