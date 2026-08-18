@@ -267,11 +267,28 @@
   }
 
   /* waveform signature */
+  .waveform-row{
+    display:flex;
+    align-items:center;
+    gap: 1.5rem;
+    margin-top: 3.2rem;
+  }
+  .clef-mark{
+    flex-shrink: 0;
+    height: 52px;
+    width: auto;
+    aspect-ratio: 41.161 / 47.605;
+    opacity: 0.6;
+    color: var(--brass-bright);
+  }
+  .clef-mark path{
+    fill: currentColor;
+  }
   .waveform{
     width: 100%;
     height: 90px;
-    margin-top: 3.2rem;
     display:block;
+    flex: 1;
   }
   .waveform path{
     fill:none;
@@ -335,21 +352,33 @@
     align-items: flex-end;
     padding: 1.4rem;
   }
+  .portrait img{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    z-index: 0;
+    filter: saturate(0.94) contrast(1.03);
+  }
   .portrait::before{
     content:"";
     position:absolute; inset:0;
+    z-index: 1;
     background-image: radial-gradient(circle at 30% 20%, rgba(42,99,72,0.22), transparent 55%);
   }
   .portrait::after{
     content:"";
     position:absolute;
     inset: 14px;
+    z-index: 2;
     border: 1px solid rgba(243,234,216,0.18);
     pointer-events:none;
   }
   .portrait-caption{
     position: relative;
-    z-index: 2;
+    z-index: 3;
     font-size: 0.72rem;
     letter-spacing: 0.08em;
     color: var(--muted);
@@ -589,6 +618,14 @@
   }
 
   .pub-list{ display:flex; flex-direction:column; }
+  .pub-list + .pub-subhead{ margin-top: 3rem; }
+  .pub-subhead{
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 3rem 0 0.4rem;
+  }
   .pub-row{
     display:grid;
     grid-template-columns: 6rem 1fr auto;
@@ -604,6 +641,16 @@
   .pub-row:hover{ background: rgba(63,143,104,0.06); padding-left: 0.7rem; }
   .pub-date{ font-size: 0.78rem; color: var(--muted); letter-spacing: 0.03em; }
   .pub-title{ font-family: var(--display); font-size: 1.05rem; font-weight: 450; color: var(--cream); }
+  .pub-byline{
+    display: block;
+    font-family: var(--body);
+    font-style: normal;
+    font-size: 0.74rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
   .pub-outlet{ font-size: 0.78rem; color: var(--brass); white-space: nowrap; }
 
   @media (max-width: 640px){
@@ -871,6 +918,9 @@
     }
     .form-row{ grid-template-columns: 1fr; }
     .credentials{ grid-template-columns: 1fr 1fr; }
+    .clef-mark{ height: 38px; width: auto; }
+    .waveform-row{ gap: 0.9rem; }
+    .waveform{ height: 64px; }
   }
 
   ::selection{ background: var(--brass); color: #0c2b33; }
@@ -925,10 +975,21 @@
       </div>
     </div>
 
-    <svg class="waveform" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
-      <path class="w2" d="M0,45 C 60,10 120,80 180,45 C 240,10 300,80 360,45 C 420,10 480,80 540,45 C 600,10 660,80 720,45 C 780,10 840,80 900,45 C 960,10 1020,80 1080,45 C 1140,10 1200,45 1200,45" />
-      <path class="animated" d="M0,45 C 40,20 80,70 120,45 C 160,20 200,70 240,45 C 280,20 320,70 360,45 C 400,20 440,70 480,45 C 520,20 560,70 600,45 C 640,20 680,70 720,45 C 760,20 800,70 840,45 C 880,20 920,70 960,45 C 1000,20 1040,70 1080,45 C 1120,20 1160,70 1200,45" />
-    </svg>
+    <div class="waveform-row">
+      <svg class="clef-mark" viewBox="0 0 41.161 47.605" aria-hidden="true">
+        <!-- Bass (F) clef — Rick van der Zwet, Openclipart, public domain -->
+        <g fill-rule="evenodd" transform="translate(-80.598 -338.39)">
+          <path d="m94.574 338.62c-8.785 0.21-15.515 6.36-13.334 15.79 0.002 0.01 0.013 0.02 0.016 0.03 0.256 3.25 2.96 5.81 6.276 5.81 3.485 0 6.309-2.82 6.309-6.3 0-3.08-2.191-5.64-5.098-6.2-1.158-0.41-2.896-1.34-2.82-2.84 0.036-0.74 0.903-2.09 2.294-2.77 1.691-0.79 3.434-1.22 5.194-0.86 2.667 0.49 9.489 5.39 10.019 13.88 0.31 6.44-3.31 15.15-6.849 19.27-5.698 6.51-14.851 10.55-13.955 11.27 0.803 0.72 11.61-4.22 17.237-10.42 6.867-7.44 10.267-13.64 9.937-21.17-0.19-7.54-6.03-15.7-15.226-15.49z"/>
+          <path d="m116.86 36.473a9.7721 9.1613 0 1 1 -19.546 0 9.7721 9.1613 0 1 1 19.546 0z" transform="matrix(.50978 0 0 .50978 61.959 329.32)"/>
+          <path d="m116.86 36.473a9.7721 9.1613 0 1 1 -19.546 0 9.7721 9.1613 0 1 1 19.546 0z" transform="matrix(.50978 0 0 .50978 61.959 342.37)"/>
+        </g>
+      </svg>
+
+      <svg class="waveform" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
+        <path class="w2" d="M0,45 C 60,10 120,80 180,45 C 240,10 300,80 360,45 C 420,10 480,80 540,45 C 600,10 660,80 720,45 C 780,10 840,80 900,45 C 960,10 1020,80 1080,45 C 1140,10 1200,45 1200,45" />
+        <path class="animated" d="M0,45 C 40,20 80,70 120,45 C 160,20 200,70 240,45 C 280,20 320,70 360,45 C 400,20 440,70 480,45 C 520,20 560,70 600,45 C 640,20 680,70 720,45 C 760,20 800,70 840,45 C 880,20 920,70 960,45 C 1000,20 1040,70 1080,45 C 1120,20 1160,70 1200,45" />
+      </svg>
+    </div>
   </section>
 
   <!-- ================= ABOUT ================= -->
@@ -945,8 +1006,8 @@
       <div class="about-grid">
         <div class="reveal">
           <div class="portrait">
-            <span class="portrait-mark">ES</span>
-            <span class="portrait-caption">Photograph — replace with your own image</span>
+            <img src="images/emma-ballarat.jpg" alt="Emma Sullivan playing double bass beside the koala enclosure at Ballarat Wildlife Park">
+            <span class="portrait-caption">Ballarat Wildlife Park</span>
           </div>
           <div class="credentials">
             <div class="credential"><span class="num">18+</span><span class="lab">Years performing professionally</span></div>
@@ -1119,7 +1180,7 @@
         <p class="section-note">Doctoral research and music journalism exploring the double bass and the artists shaping its future.</p>
       </div>
 
-      <a href="https://research-repository.griffith.edu.au/" target="_blank" rel="noopener" class="thesis-card reveal">
+      <a href="https://research-repository.griffith.edu.au/items/31916125-5f49-53b4-bfce-d071db3f1502/full" target="_blank" rel="noopener" class="thesis-card reveal">
         <div class="thesis-meta">
           <span class="thesis-tag">Doctor of Musical Arts · Queensland Conservatorium, Griffith University · 2017</span>
           <h3>Collaborative Contrabass: Exploring the Role of the Double Bass in Chamber Music Through Performance</h3>
@@ -1129,34 +1190,53 @@
       </a>
 
       <div class="pub-list reveal">
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/the-story-of-australias-first-female-mechanic-will-be-brought-to-life-on-bass/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Jul 2022</span>
           <span class="pub-title">The story of Australia's first female mechanic will be brought to life on bass</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/live-review-emma-checks-out-the-anam-set-festival/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">May 2022</span>
           <span class="pub-title">Live review: the ANAM Set Festival, opening night</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/dr-aristea-mellos-as-women-were-still-fighting-to-be-seen-and-heard/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Sep 2019</span>
           <span class="pub-title">Dr Aristea Mellos: "As women, we're still fighting to be seen and heard"</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/the-melbourne-ensemble-brings-chamber-music-to-an-urban-winery/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Jun 2019</span>
           <span class="pub-title">The Melbourne Ensemble brings chamber music to an urban winery</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/strelitzia-piano-trio-breaks-onto-the-scene-in-victoria/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Mar 2019</span>
           <span class="pub-title">Strelitzia Piano Trio breaks onto the scene in Victoria</span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
-        <a href="https://www.cutcommon.com.au" target="_blank" rel="noopener" class="pub-row">
+        <a href="https://www.cutcommonmag.com/meet-the-women-in-bass/" target="_blank" rel="noopener" class="pub-row">
           <span class="pub-date">Mar 2019</span>
           <span class="pub-title">Meet the Women in Bass</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+      </div>
+
+      <p class="pub-subhead reveal">Featured in</p>
+      <div class="pub-list reveal">
+        <a href="https://www.cutcommonmag.com/emma-sullivans-event-shows-us-more-female-representation-in-solo-bass/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">Mar 2019</span>
+          <span class="pub-title">Emma Sullivan's event shows us "more female representation in solo bass"<span class="pub-byline">By Stephanie Eslake</span></span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a href="https://www.cutcommonmag.com/students-in-victoria-are-getting-a-massive-double-bass-day/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">Mar 2019</span>
+          <span class="pub-title">Students in Victoria are getting a massive double bass day<span class="pub-byline">By Stephanie Eslake</span></span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a href="https://www.cutcommonmag.com/these-are-the-women-in-music-who-inspire-us/" target="_blank" rel="noopener" class="pub-row">
+          <span class="pub-date">Mar 2020</span>
+          <span class="pub-title">These are the women in music who inspire us<span class="pub-byline">Contributor feature, CutCommon</span></span>
           <span class="pub-outlet">CutCommon ↗</span>
         </a>
       </div>
@@ -1185,12 +1265,15 @@
         </div>
 
         <div class="calendly-frame">
-          <!-- 
-            INSTRUCTIONS: Replace data-url with your actual Calendly scheduling link, 
-            e.g. data-url="https://calendly.com/your-username/consultation"
+          <!--
+            CALENDLY SETUP:
+            Replace the data-url below with your real Calendly link, e.g.
+            data-url="https://calendly.com/your-username/consultation"
+            The scheduler loads automatically once a real link is set —
+            no other changes needed, and nothing loads until you do.
           -->
-          <div class="calendly-inline-widget" data-url="https://calendly.com/emma-sullivan-bass">
-            <div class="calendly-placeholder">
+          <div class="calendly-embed" id="calendlyEmbed" data-url="https://calendly.com/your-username/consultation">
+            <div class="calendly-placeholder" id="calendlyPlaceholder">
               <strong>Interactive Scheduler</strong>
               <span>Add your Calendly link in the data-url attribute above to enable live booking here.</span>
             </div>
@@ -1292,8 +1375,7 @@
   </div>
 </footer>
 
-<!-- Calendly script widget loader -->
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<!-- Calendly script is injected dynamically by the script below, only once a real link is set -->
 
 <script>
   // Mobile Nav Toggle
@@ -1337,6 +1419,26 @@
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
   revealElements.forEach(el => revealObserver.observe(el));
+
+  // Calendly: only load the widget once a real link replaces the placeholder,
+  // so nothing tries to fetch a fake URL (which would show Calendly's own 404 page).
+  (function initCalendly(){
+    var embed = document.getElementById('calendlyEmbed');
+    if (!embed) return;
+    var url = embed.getAttribute('data-url') || '';
+    var isPlaceholder = !url || url.indexOf('your-username') !== -1;
+    if (isPlaceholder) return;
+
+    embed.innerHTML = '';
+    embed.classList.add('calendly-inline-widget');
+    embed.style.minWidth = '100%';
+    embed.style.height = '620px';
+
+    var script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+  })();
 
   // Web3Forms AJAX Submission Handler
   const contactForm = document.getElementById('contactForm');
