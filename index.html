@@ -369,6 +369,8 @@
     content:"";
     position:absolute; inset:0;
     background-image: radial-gradient(circle at 30% 20%, rgba(42,99,72,0.22), transparent 55%);
+    z-index: 1;
+    pointer-events: none;
   }
   .portrait::after{
     content:"";
@@ -376,6 +378,15 @@
     inset: 14px;
     border: 1px solid rgba(243,234,216,0.18);
     pointer-events:none;
+    z-index: 2;
+  }
+  .portrait img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
   }
   .portrait-caption{
     position: relative;
@@ -384,6 +395,9 @@
     letter-spacing: 0.08em;
     color: var(--muted);
     text-transform: uppercase;
+    background: rgba(12, 43, 51, 0.75);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
   }
   .portrait-mark{
     position:absolute; top: 50%; left:50%;
@@ -393,6 +407,7 @@
     font-size: 4.5rem;
     color: rgba(243,234,216,0.12);
     letter-spacing: -0.02em;
+    z-index: 1;
   }
 
   .about-copy p{
@@ -1007,8 +1022,9 @@
       <div class="about-grid">
         <div class="reveal">
           <div class="portrait">
+            <img src="./Emma Ballarat Wildlife.jpg" alt="Emma with wildlife in Ballarat">
             <span class="portrait-mark">ES</span>
-            <span class="portrait-caption">Photograph — replace with your own image</span>
+            <span class="portrait-caption">Ballarat, Victoria</span>
           </div>
           <div class="credentials">
             <div class="credential"><span class="num">18+</span><span class="lab">Years performing professionally</span></div>
@@ -1135,18 +1151,21 @@
           </div>
         </div>
 
+        <div class="card card-img-wrap">
+          <img src="./Nightingale MCO.jpeg" alt="Emma performing with Melbourne Chamber Orchestra">
+          <div class="card-img-content">
+            <span class="card-year">Concert Series</span>
+            <h4>Nightingale — Soloist, Contrabass Sonata in G minor</h4>
+            <p>Featured as a soloist performing Henry Eccles's <em>Contrabass Sonata</em> within a program directed by Guest Director Donald Nicolson, touring to the Melbourne Recital Centre, Pakenham and Geelong.</p>
+            <div class="card-loc">Melbourne Chamber Orchestra</div>
+          </div>
+        </div>
+
         <div class="card">
           <span class="card-year">Residency</span>
           <h4>Tempo Rubato — Four-Concert Residency</h4>
           <p>A month-long residency featuring four distinct Monday-night programs exploring solo bass repertoire, cello-and-bass duos, string quintets, and a celebration of Melbourne's vibrant female and gender-diverse bass community.</p>
           <div class="card-loc">Tempo Rubato, Brunswick</div>
-        </div>
-
-        <div class="card">
-          <span class="card-year">Concert Series</span>
-          <h4>Nightingale — Soloist, Contrabass Sonata in G minor</h4>
-          <p>Featured as a soloist performing Henry Eccles's <em>Contrabass Sonata</em> within a program directed by Guest Director Donald Nicolson, touring to the Melbourne Recital Centre, Pakenham and Geelong.</p>
-          <div class="card-loc">Melbourne Chamber Orchestra</div>
         </div>
 
         <div class="card">
