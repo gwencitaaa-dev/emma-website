@@ -541,6 +541,73 @@
     .cards-grid{ grid-template-columns: 1fr; }
   }
 
+  /* ---------- Publications ---------- */
+  .thesis-card{
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2.5rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 2.4rem;
+    text-decoration:none;
+    color: inherit;
+    margin-bottom: 3rem;
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .thesis-card:hover{ border-color: var(--brass); background: var(--panel-2); }
+  .thesis-tag{
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+  .thesis-meta h3{
+    margin-top: 0.8rem;
+    font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+    font-weight: 450;
+    max-width: 44ch;
+    line-height: 1.3;
+  }
+  .thesis-meta p{
+    margin-top: 1rem;
+    color: var(--cream-dim);
+    font-size: 0.95rem;
+    font-weight: 300;
+    max-width: 58ch;
+  }
+  .thesis-link{
+    white-space: nowrap;
+    font-size: 0.85rem;
+    color: var(--brass-bright);
+    flex-shrink: 0;
+  }
+
+  .pub-list{ display:flex; flex-direction:column; }
+  .pub-row{
+    display:grid;
+    grid-template-columns: 6rem 1fr auto;
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 1.3rem 0.2rem;
+    border-top: 1px solid var(--line);
+    text-decoration:none;
+    color: inherit;
+    transition: background .25s ease, padding-left .25s ease;
+  }
+  .pub-list .pub-row:last-child{ border-bottom: 1px solid var(--line); }
+  .pub-row:hover{ background: rgba(63,143,104,0.06); padding-left: 0.7rem; }
+  .pub-date{ font-size: 0.78rem; color: var(--muted); letter-spacing: 0.03em; }
+  .pub-title{ font-family: var(--display); font-size: 1.05rem; font-weight: 450; color: var(--cream); }
+  .pub-outlet{ font-size: 0.78rem; color: var(--brass); white-space: nowrap; }
+
+  @media (max-width: 640px){
+    .thesis-card{ flex-direction: column; align-items: flex-start; }
+    .pub-row{ grid-template-columns: 1fr; gap: 0.3rem; padding: 1.1rem 0.2rem; }
+    .pub-outlet{ order: -1; }
+  }
+
   /* ---------- Calendly ---------- */
   .booking{
     background: var(--panel);
@@ -826,6 +893,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#publications">Publications</a></li>
         <li><a href="#booking">Book a Call</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -1036,6 +1104,61 @@
           <p>Regular journalism and feature writing for CutCommon, highlighting the new generation of composers, performers and arts administrators in the classical music industry.</p>
           <div class="card-loc">CutCommon Magazine</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PUBLICATIONS ================= -->
+  <section class="section" id="publications">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <p class="eyebrow">Publications</p>
+          <h2>Writing &amp;<br>research.</h2>
+        </div>
+        <p class="section-note">Doctoral research and music journalism exploring the double bass and the artists shaping its future.</p>
+      </div>
+
+      <a class="thesis-card reveal" href="https://research-repository.griffith.edu.au/items/31916125-5f49-53b4-bfce-d071db3f1502/full" target="_blank" rel="noopener">
+        <div class="thesis-meta">
+          <span class="thesis-tag">Doctor of Musical Arts · Queensland Conservatorium, Griffith University · 2017</span>
+          <h3>Collaborative Contrabass: Exploring the Role of the Double Bass in Chamber Music Through Performance</h3>
+          <p>A practice-led doctoral project pairing musicological research with four public chamber recitals, tracing the double bass's role in chamber music from the eighteenth century to newly commissioned works — including a study of the historical Viennese tuning system and its Classical-era repertoire, the instrument's changing place in the Romantic piano quintet, and contemporary duets written for double bass over the last three decades. Supervised by Stephen Emmerson and Peter Roennfeldt.</p>
+        </div>
+        <span class="thesis-link">View on Griffith Research Repository →</span>
+      </a>
+
+      <div class="pub-list reveal">
+        <a class="pub-row" href="https://www.cutcommonmag.com/the-story-of-australias-first-female-mechanic-will-be-brought-to-life-on-bass/" target="_blank" rel="noopener">
+          <span class="pub-date">Jul 2022</span>
+          <span class="pub-title">The story of Australia's first female mechanic will be brought to life on bass</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a class="pub-row" href="https://www.cutcommonmag.com/live-review-emma-checks-out-the-anam-set-festival/" target="_blank" rel="noopener">
+          <span class="pub-date">May 2022</span>
+          <span class="pub-title">Live review: the ANAM Set Festival, opening night</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a class="pub-row" href="https://www.cutcommonmag.com/dr-aristea-mellos-as-women-were-still-fighting-to-be-seen-and-heard/" target="_blank" rel="noopener">
+          <span class="pub-date">Sep 2019</span>
+          <span class="pub-title">Dr Aristea Mellos: "As women, we're still fighting to be seen and heard"</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a class="pub-row" href="https://www.cutcommonmag.com/the-melbourne-ensemble-brings-chamber-music-to-an-urban-winery/" target="_blank" rel="noopener">
+          <span class="pub-date">Jun 2019</span>
+          <span class="pub-title">The Melbourne Ensemble brings chamber music to an urban winery</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a class="pub-row" href="https://www.cutcommonmag.com/strelitzia-piano-trio-breaks-onto-the-scene-in-victoria/" target="_blank" rel="noopener">
+          <span class="pub-date">Mar 2019</span>
+          <span class="pub-title">Strelitzia Piano Trio breaks onto the scene in Victoria</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
+        <a class="pub-row" href="https://www.cutcommonmag.com/meet-the-women-in-bass/" target="_blank" rel="noopener">
+          <span class="pub-date">Mar 2019</span>
+          <span class="pub-title">Meet the Women in Bass</span>
+          <span class="pub-outlet">CutCommon ↗</span>
+        </a>
       </div>
     </div>
   </section>
